@@ -5,10 +5,10 @@ import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 
 import Image from 'next/image';
-import { userOrganizationWithColors } from "@/app/lib/definitions";
+import { organizationWithColors } from "@/app/lib/definitions";
 
 
-export default function OrganizationCard({ organization }: { organization: userOrganizationWithColors }) {
+export default function OrganizationCard({ organization }: { organization: organizationWithColors }) {
 
     const [ topHover, setTopHover] = useState(false)
     const [bottomHover, setBottomHover] = useState(false);
