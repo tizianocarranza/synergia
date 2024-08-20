@@ -18,7 +18,7 @@ const config: Config = {
       },
       fontSize: {
         md: "1rem",
-        "15xl": "210px"
+        "15xl": "110px"
       },
       colors: {
         brand: "#40E0D0"

@@ -25,12 +25,12 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`flex flex-col items-center h-screen w-screen overflow-x-hidden text-lg font-medium gap-y-36 lg:gap-y-44 ${epilogue.className}`} >
+      <body className={`flex flex-col items-center h-screen w-screen overflow-x-hidden overflow-y-scroll text-lg font-medium ${epilogue.className}`} >
         <Navbar />
-        <main className="flex flex-col items-center justify-center w-10/12 bg-black">
+        <main className="flex flex-col items-center justify-center w-10/12 mt-28 bg-black">
           {children}
         </main>
-          <Footer />
+        <Footer />
       </body>
     </html>
   );
