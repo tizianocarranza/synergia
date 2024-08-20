@@ -1,0 +1,108 @@
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  input:-webkit-autofill {
+    @apply bg-black;
+    -webkit-box-shadow: 0 0 0px 1000px #000000 inset;
+    box-shadow: 0 0 0px 1000px #000000 inset;
+    -webkit-text-fill-color: #ffffff;
+  };
+
+  ul, li {
+    list-style: none;
+  }
+
+  form {
+    @apply text-md;
+  };
+
+  input {
+    @apply h-10 bg-transparent border-2 rounded-md px-1;
+  };
+  
+  textarea {
+    @apply bg-transparent border-2 rounded-md px-1 resize-none;
+  };
+  
+  datalist {
+    @apply max-h-60;
+  }
+}
+
+
+
+/* Hover underline custom class */
+.hover-underline::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: theme('colors.brand');
+  transform: scaleX(0);
+  transform-origin: left; /* Para que el subrayado empiece de la izquierda */
+  transition: transform 0.3s ease;
+}
+
+.hover-underline:hover::after {
+  transform: scaleX(1);
+}
+
+/* Para que el subrayado desaparezca hacia la derecha */
+.hover-underline:not(:hover)::after {
+  transform-origin: right;
+  transform: scaleX(0)
+}
+
+.synergia-header {
+  @apply text-brand text-6xl lg:text-15xl text-center font-bold;
+}
+
+.main-page-header {
+  @apply text-brand text-4xl lg:text-6xl text-center lg:text-left;
+}
+
+.look-for-page-header {
+  @apply text-white text-4xl lg:text-6xl text-center mb-14 lg:mb-28;
+}
+
+.card-bottom-selected {
+  @apply lg:hover:h-full lg:hover:-translate-y-1/2
+}
+
+.card-top-selected {
+  @apply lg:hover:h-full
+}
