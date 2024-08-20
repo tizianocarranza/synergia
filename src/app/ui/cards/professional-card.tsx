@@ -43,7 +43,7 @@ export default function ProfessionalCard({ professional }: { professional: profe
                         onMouseEnter={isDesktop ? handleMouseEnterTop : undefined} 
                         onMouseLeave={isDesktop ? handleMouseLeaveTop : undefined}
                     >
-                        <Image src={imgSrc || "/avatar.svg"} alt="Avatar" onError={handleImgError} width={400} height={400} className={`${ bottomHover ? "h-0" : "h-full"} ${imgSrc == "/avatar.svg" || imgSrc == "" ? "object-contain" : "object-cover"} w-full transition-all 300ms ease-out`} />
+                        <Image src={imgSrc || "/avatar.svg"} alt="Avatar" onError={handleImgError} width={400} height={400} className={`${ bottomHover ? "h-0" : "h-full"} ${imgSrc == "/avatar.svg" || !imgSrc ? "object-contain" : "object-cover"} w-full transition-all 300ms ease-out`} />
                     </div>
                     <div className="flex justify-center items-center h-1/2 rounded-b-full lg:hover:h-full lg:hover:-translate-y-1/2 transition-all 300ms ease-out" 
                         onMouseEnter={isDesktop ? handleMouseEnterBottom : undefined}
