@@ -41,7 +41,7 @@ export default function OrganizationCard({ organization }: { organization: organ
 
     return (
             <div 
-                className="relative flex items-center justify-center h-80 w-80 lg:h-96 lg:w-96 rounded-md text-white text-center list-none transition 300ms ease-in-out" 
+                className="relative flex items-center justify-center h-80 w-80 lg:h-96 lg:w-96 rounded-md text-white text-center text-xl list-none transition 300ms ease-in-out" 
                 style={{ backgroundColor: topHover || bottomHover ? organization.cardColor : "black", border: `5px solid ${organization.color}` }}
             >
                 <div className="relative h-5/6 w-5/6 rounded-md overflow-hidden">
@@ -61,11 +61,13 @@ export default function OrganizationCard({ organization }: { organization: organ
                                 bottomHover ?
                                     (
                                         <>
-                                            <li>{organization.description}</li>
+                                            <li className="flex items-start justify-center max-h-2/3 my-5 text-md overflow-y-scroll scroll-container">
+                                                {organization.description}
+                                            </li>
                                         </>
                                     ) : (
                                         <>
-                                            <li><span className="font-bold p-1 text-xl" style={{ background: organization.color }}>{organization.area}</span></li>
+                                            <li><span className="font-bold p-1" style={{ background: organization.color }}>{organization.area}</span></li>
                                         </>
                                     )
                             }

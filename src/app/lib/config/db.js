@@ -1,4 +1,3 @@
-import { CONNREFUSED } from "dns";
 import mongoose from "mongoose";
 
 global.mongoose = {

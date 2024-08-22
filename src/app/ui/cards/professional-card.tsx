@@ -35,7 +35,7 @@ export default function ProfessionalCard({ professional }: { professional: profe
 
 
     return (
-            <div className="relative flex items-center justify-center h-80 w-80 lg:h-96 lg:w-96 rounded-full text-white text-center list-none transition 300ms ease-in-out" 
+            <div className="relative flex items-center justify-center h-80 w-80 lg:h-96 lg:w-96 rounded-full text-white text-center text-xl list-none transition 300ms ease-in-out" 
             style={{ backgroundColor:  topHover || bottomHover ? professional.cardColor : "black", border: `5px solid ${professional.color}` }}
             >
                 <div className="h-5/6 w-5/6 rounded-full overflow-hidden">
@@ -49,18 +49,20 @@ export default function ProfessionalCard({ professional }: { professional: profe
                         onMouseEnter={isDesktop ? handleMouseEnterBottom : undefined}
                         onMouseLeave={isDesktop ? handleMouseLeaveBottom : undefined}
                      >
-                        <div className="flex flex-col justify-center items-center w-10/12 gap-3 ">
+                        <div className="flex flex-col justify-center items-center h-full w-10/12 gap-3">
                         <li className="font-bold">{professional.name}</li>
                             {
                                 bottomHover ?
                                     (
                                         <>
-                                            <li>{professional.description}</li>
+                                            <li className="flex items-start justify-center max-h-2/3 my-5 text-md overflow-y-scroll scroll-container">
+                                                {professional.description}
+                                            </li>
                                         </>
                                     ) : (
                                         <>
-                                            <li><span className="font-bold p-1 text-xl" style={{ background: professional.color }}>{professional.specialty}</span></li>
-                                            <li>{professional.experience} years of exp.</li>
+                                            <li><span className="font-bold p-1" style={{ background: professional.color }}>{professional.specialty}</span></li>
+                                            <li className="text-md">{professional.experience} years of exp.</li>
                                         </>
                                     )
                             }

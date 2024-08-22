@@ -106,3 +106,16 @@ body {
 .card-top-selected {
   @apply lg:hover:h-full
 }
+
+.input-error {
+  @apply mt-2 text-sm text-red-300;
+}
+.form-error {
+  @apply mt-3 text-md text-red-300 font-semibold;
+}
+.form-success {
+  @apply mt-3 text-md text-green-300 font-semibold;
+}
+.scroll-container::-webkit-scrollbar {
+  visibility: hidden;
+}

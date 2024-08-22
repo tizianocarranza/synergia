@@ -1,6 +1,8 @@
+"use server"
+
 import { dbConnect } from "@/app/lib/config/db"
-import Professionals from "../config/models/professional"
-import Organizations from "../config/models/organization"
+import Professionals from "../config/models/professionals"
+import Organizations from "../config/models/organizations"
 import { formatOrganizations, formatProfessionals } from "../utils"
 
 //Professionals

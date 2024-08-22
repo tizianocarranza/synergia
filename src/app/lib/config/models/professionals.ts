@@ -20,6 +20,7 @@ const professionalSchema = new Schema({
     },
 });
 
+console.log(mongoose.models);
 const Professionals = mongoose.models.Professionals || mongoose.model("Professionals" /* model */, professionalSchema /* schema */, "Professionals" /* coll */);
 
 export default Professionals;
