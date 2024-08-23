@@ -2,13 +2,12 @@
 
 import { specialties, areas } from "@/app/lib/definitions";
 import { PrimaryButton } from "../buttons/buttons";
-import { organizationSignUpFormAction, OrganizationState, professionalSignUpFormAction } from "@/app/lib/data/actions";
+import { organizationSignUpFormAction, OrganizationState, ProfessionalState, professionalSignUpFormAction } from "@/app/lib/data/actions";
 import { useActionState } from "react";
-import { ProfessionalState } from "@/app/lib/data/actions";
 
 export function ProfessionalSignUpForm() {
     const initialState: ProfessionalState = {
-        errors: {},
+        errors: null,
         message: null,
     };
 

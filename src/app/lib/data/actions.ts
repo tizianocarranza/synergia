@@ -86,7 +86,7 @@ export const professionalSignUpFormAction = async (prevState: ProfessionalState,
             ...prevState, 
             errors: validatedProfessionalFormData.error.flatten().fieldErrors,
             message: "Missing Fields, please submit the required information to create a professional's account."
-        }
+        } as ProfessionalState;
     }
 
     const hashedPass = await bcrypt.hash(validatedProfessionalFormData.data.password, saltRounds)
@@ -102,7 +102,7 @@ export const professionalSignUpFormAction = async (prevState: ProfessionalState,
             ...prevState,
             errors: null,
             message: "Professional's account created succesfully."
-        }
+        } as ProfessionalState;
 
     } catch (error) {
         console.error("Error creating professional: ", error);
@@ -115,11 +115,10 @@ export const professionalSignUpFormAction = async (prevState: ProfessionalState,
 
         return { 
             ...prevState,
-            errros: { server: [errorMessage] },
+            errors: { server: [errorMessage] },
             message: errorMessage,
-        }
+        } as ProfessionalState;
     }
-
 }
 
 
@@ -133,7 +132,7 @@ export const organizationSignUpFormAction = async (prevState: OrganizationState,
             ...prevState,
             errors: validatedOrganizationFormData.error.flatten().fieldErrors,
             message: "Missing Fields, please submit the required information to create an organization's account."
-        }
+        } as OrganizationState;
     }
 
     const hashedPass = await bcrypt.hash(validatedOrganizationFormData.data.password, saltRounds);
@@ -147,7 +146,7 @@ export const organizationSignUpFormAction = async (prevState: OrganizationState,
             ...prevState,
             errors: null,
             message: "Organization's account created succesfully."
-        }
+        } as OrganizationState;
 
     } catch (error) {
         console.error("Error while creating organization's account: ", error);
@@ -159,8 +158,8 @@ export const organizationSignUpFormAction = async (prevState: OrganizationState,
 
         return {
             ...prevState,
-            errros: { server: [errorMessage]},
+            errors: { server: [errorMessage]},
             message: errorMessage
-        }
+        } as OrganizationState;
     }
 }
