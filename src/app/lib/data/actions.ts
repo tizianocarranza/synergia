@@ -2,8 +2,13 @@
 
 import { dbConnect } from "../config/db";
 import Professionals from "../config/models/professionals";
+import Organizations from "../config/models/organizations";
 import { z } from "zod"
-import { specialties } from "../definitions"
+import { areas, specialties } from "../definitions";
+import bcrypt from "bcrypt";
+
+const saltRounds = 10;
+
 
 /* Form Schemas */
 const userFormSchema = z.object({
@@ -30,6 +35,14 @@ const professionalFormSchema = userFormSchema.extend({
     })
 });
 
+const organizationFormSchema = userFormSchema.extend({
+    area: z.enum(areas, {
+        message: "Please select the organization's operative area.",
+        invalid_type_error: "Oops! That doesn't seem like a valid organization's operative area. Please select one from the list."
+    }),
+    website: z.string().url("Please enter a valid URL (this field is optional).").optional().or(z.literal("")) //Para manejar cuando se envia vacio porque URL espera un string valido
+})
+
 //Form States
 export type ProfessionalState = {
     errors?: {
@@ -41,9 +54,26 @@ export type ProfessionalState = {
         experience?: string[];
         specialty?: string[];
         employmentStatus?: string[];
+
+        server?: string[];
     } | null;
     message?: string | null;
 };
+export type OrganizationState = {
+    errors?: {
+        name?: string[];
+        email?: string[];
+        password?: string[];
+        description?: string[];
+        image?: string[];
+        area?: string[];
+        website?: string[];
+
+        server?: string[];
+    } | null;
+
+    message?: string | null;
+}
 
 
 export const professionalSignUpFormAction = async (prevState: ProfessionalState, formData: FormData) => {
@@ -55,37 +85,82 @@ export const professionalSignUpFormAction = async (prevState: ProfessionalState,
         return {
             ...prevState, 
             errors: validatedProfessionalFormData.error.flatten().fieldErrors,
-            message: "Missing Fields, please submit the required information to create an account."
+            message: "Missing Fields, please submit the required information to create a professional's account."
         }
     }
-    
-    const newState = { 
-        ...prevState,
-        errors: null,
-        message: null,
-    }
-    
-    const professional = validatedProfessionalFormData.data;
 
-    console.log(professional)
+    const hashedPass = await bcrypt.hash(validatedProfessionalFormData.data.password, saltRounds)
+    const professional = { ...validatedProfessionalFormData.data, password: hashedPass};
+    
 
     try {
         await dbConnect();
 
         await Professionals.create({ ...professional });
 
-        return {
-            ...newState,
-            message: "Account created succesfully"
+        return { 
+            ...prevState,
+            errors: null,
+            message: "Professional's account created succesfully."
         }
 
     } catch (error) {
         console.error("Error creating professional: ", error);
 
-        return {
-            ...newState,
-            message: "An error occurred while creating the account."
+        let errorMessage = "Something went wrong while creating the professional's account.";
+
+        if (error instanceof Error) {
+            errorMessage = error.message; //Si es un tipo Error se le asigna el error.message sino el por defecto
+        }
+
+        return { 
+            ...prevState,
+            errros: { server: [errorMessage] },
+            message: errorMessage,
         }
     }
 
+}
+
+
+export const organizationSignUpFormAction = async (prevState: OrganizationState, formData: FormData) => {
+
+    const rawOrganizationFormData = Object.fromEntries(formData.entries());
+    const validatedOrganizationFormData = organizationFormSchema.safeParse(rawOrganizationFormData);
+
+    if(!validatedOrganizationFormData.success) {
+        return {
+            ...prevState,
+            errors: validatedOrganizationFormData.error.flatten().fieldErrors,
+            message: "Missing Fields, please submit the required information to create an organization's account."
+        }
+    }
+
+    const hashedPass = await bcrypt.hash(validatedOrganizationFormData.data.password, saltRounds);
+    const organization = { ...validatedOrganizationFormData.data, password: hashedPass };
+
+    try {
+        await dbConnect();
+        await Organizations.create({...organization});
+
+        return {
+            ...prevState,
+            errors: null,
+            message: "Organization's account created succesfully."
+        }
+
+    } catch (error) {
+        console.error("Error while creating organization's account: ", error);
+
+        let errorMessage = "Something went wrong while creating organization's account."
+        if(error instanceof Error) {
+            errorMessage = error.message;
+        }
+
+        return {
+            ...prevState,
+            errros: { server: [errorMessage]},
+            message: errorMessage
+        }
+    }
 }

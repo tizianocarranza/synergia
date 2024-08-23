@@ -55,7 +55,7 @@ export default function OrganizationCard({ organization }: { organization: organ
                         onMouseEnter={isDesktop ? handleMouseEnterBottom : undefined} 
                         onMouseLeave={isDesktop ? handleMouseLeaveBottom : undefined}
                     >
-                        <div className="flex flex-col justify-center items-center w-10/12 gap-3 ">
+                        <div className="flex flex-col justify-center items-center h-full w-10/12 gap-3">
                         <li className="font-bold">{organization.name}</li>
                             {
                                 bottomHover ?
