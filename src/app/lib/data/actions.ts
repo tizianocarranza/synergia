@@ -12,10 +12,10 @@ const saltRounds = 10;
 
 /* Form Schemas */
 const userFormSchema = z.object({
-    name: z.string().min(2, "Please enter your name."),
+    name: z.string().min(2, "Please enter a valid name."),
     email: z.string().email("Please enter a valid email address."),
-    password: z.string().min(8, "Your password should have at least 8 characters."),
-    description: z.string().min(50, "Tell us a bit more! Your description should be at least 50 characters long."),
+    password: z.string().min(8, "Password should have at least 8 characters."),
+    description: z.string().min(50, "Tell us a bit more! Description should be at least 50 characters long."),
     image: z.string().optional()
 });
 
