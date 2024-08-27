@@ -6,6 +6,9 @@ import Organizations from "../config/models/organizations";
 import { z } from "zod"
 import { areas, specialties } from "../definitions";
 import bcrypt from "bcrypt";
+import { signIn } from "@/../auth";
+import { AuthError } from "next-auth";
+import { error } from "console";
 
 const saltRounds = 10;
 
@@ -43,39 +46,49 @@ const organizationFormSchema = userFormSchema.extend({
     website: z.string().url("Please enter a valid URL (this field is optional).").optional().or(z.literal("")) //Para manejar cuando se envia vacio porque URL espera un string valido
 })
 
+
 //Form States
-export type ProfessionalState = {
-    errors?: {
-        name?: string[];
-        email?: string[];
-        password?: string[];
-        description?: string[];
-        image?: string[];
-        experience?: string[];
-        specialty?: string[];
-        employmentStatus?: string[];
+    /* Professional */
+    export type ProfessionalState = {
+        errors?: {
+            name?: string[];
+            email?: string[];
+            password?: string[];
+            description?: string[];
+            image?: string[];
+            experience?: string[];
+            specialty?: string[];
+            employmentStatus?: string[];
 
-        server?: string[];
-    } | null;
-    message?: string | null;
-};
-export type OrganizationState = {
-    errors?: {
-        name?: string[];
-        email?: string[];
-        password?: string[];
-        description?: string[];
-        image?: string[];
-        area?: string[];
-        website?: string[];
+            server?: string[];
+        } | null;
+        message?: string | null;
+    };
+    /* Organization */
+    export type OrganizationState = {
+        errors?: {
+            name?: string[];
+            email?: string[];
+            password?: string[];
+            description?: string[];
+            image?: string[];
+            area?: string[];
+            website?: string[];
 
-        server?: string[];
-    } | null;
+            server?: string[];
+        } | null;
 
-    message?: string | null;
-}
+        message?: string | null;
+    }
+
+    /* Sign in */
+    export type SignInState = {
+        error?: boolean;
+        message?: string | null;
+    }
 
 
+/* Form Actions */
 export const professionalSignUpFormAction = async (prevState: ProfessionalState, formData: FormData) => {
 
     const rawProfessionalFormData = Object.fromEntries(formData.entries());
@@ -121,7 +134,6 @@ export const professionalSignUpFormAction = async (prevState: ProfessionalState,
     }
 }
 
-
 export const organizationSignUpFormAction = async (prevState: OrganizationState, formData: FormData) => {
 
     const rawOrganizationFormData = Object.fromEntries(formData.entries());
@@ -161,5 +173,27 @@ export const organizationSignUpFormAction = async (prevState: OrganizationState,
             errors: { server: [errorMessage]},
             message: errorMessage
         } as OrganizationState;
+    }
+}
+
+export const autheticationFormAction = async (prevState: SignInState, formData: FormData) => {
+    try 
+    {
+        await signIn("credentials", formData)
+        return { error: false, message: "Signed in succesfully" } as SignInState;
+    } 
+    catch (error) 
+    {
+        if(error instanceof AuthError) 
+        {
+            switch(error.type) 
+            {
+                case "CredentialsSignin":
+                    return { error: true, message: "Invalid credentials." } as SignInState;
+                default:
+                    return { error: true, message: "Something went wrong." } as SignInState;
+            }
+        }
+        throw error;
     }
 }

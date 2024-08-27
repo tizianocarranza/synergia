@@ -1,3 +1,4 @@
+import { getSession } from "next-auth/react";
 import { areaColors, Area, organizationWithColors, professionalWithColors, Specialty, specialtyColors } from "./definitions";
 
 export const hexToRGBA = (hex: string, opacity: number) => {
