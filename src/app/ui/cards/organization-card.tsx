@@ -67,7 +67,7 @@ export default function OrganizationCard({ organization }: { organization: organ
                                         </>
                                     ) : (
                                         <>
-                                            <li><span className="font-bold p-1" style={{ background: organization.color }}>{organization.area}</span></li>
+                                            <li><span className="font-bold p-1 text-md" style={{ background: organization.color }}>{organization.area}</span></li>
                                         </>
                                     )
                             }

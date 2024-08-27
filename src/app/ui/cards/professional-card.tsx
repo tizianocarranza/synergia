@@ -61,7 +61,7 @@ export default function ProfessionalCard({ professional }: { professional: profe
                                         </>
                                     ) : (
                                         <>
-                                            <li><span className="font-bold p-1" style={{ background: professional.color }}>{professional.specialty}</span></li>
+                                            <li><span className="font-bold p-1 text-md" style={{ background: professional.color }}>{professional.specialty}</span></li>
                                             <li className="text-md">{professional.experience} years of exp.</li>
                                         </>
                                     )
