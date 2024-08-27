@@ -2,7 +2,6 @@ import { MainPage } from "@/app/ui/pages/pages";
 import { LinkButton } from "@/app/ui/buttons/buttons";
 
 export default function Home() {
-
   return (
     <MainPage
       header="Synergia"

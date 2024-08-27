@@ -3,8 +3,8 @@
 import { dbConnect } from "@/app/lib/config/db"
 import Professionals from "../config/models/professionals"
 import Organizations from "../config/models/organizations"
-import { formatOrganizations, formatProfessionals } from "../utils"
-import { organization, professional } from "../definitions"
+import { formatOrganization, formatOrganizations, formatProfessional, formatProfessionals } from "../utils"
+import { organization, organizationWithColors, professional, professionalWithColors } from "../definitions"
 
 //Professionals
 export const getAllProfessionals = async() => {
@@ -21,6 +21,7 @@ export const getAllProfessionals = async() => {
 }
 
 
+
 //Organizations
 export const getAllOrganizations = async() => {
     try {
@@ -35,6 +36,33 @@ export const getAllOrganizations = async() => {
     }
 }
 
+
+//Profile
+export const getUserById = async (id: string | undefined) => {
+    try {
+        await dbConnect();
+
+        let rawUser;
+        rawUser = await Professionals.findById(id);
+
+        if(!rawUser) {
+            rawUser = await Organizations.findById(id);
+
+            if(!rawUser) throw new Error("Ups! user not found.");
+
+            const formattedOrganization = formatOrganization(rawUser);
+            return { formattedOrganization: formattedOrganization as organizationWithColors, formattedProfessional: null };
+        }
+
+        const formattedProfessional = formatProfessional(rawUser);
+        return { formattedProfessional: formattedProfessional as professionalWithColors, formattedOrganization: null };
+
+    } catch (error) {
+
+        console.error("Failed to fetch user: ", error);
+        throw new Error("Failed to fetch user");
+    }
+}
 
 //Login
 export const getUserByEmail = async (email: string) => {
