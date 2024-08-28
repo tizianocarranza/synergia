@@ -26,14 +26,18 @@
         "./src/*"
       ]
     },
-    "target": "ES2017"
+    "target": "ES2017",
+    "types": [
+      "./src/app/lib/types/nextauth.d.ts"
+    ],
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/lib/config/db.js"
+    "src/app/lib/config/db.js",
+    "src/app/lib/types/nextauth.d.ts"
   ],
   "exclude": [
     "node_modules"

@@ -3,10 +3,10 @@
 import { useState } from "react";
 
 import Image from 'next/image';
-import { professionalWithColors } from "@/app/lib/definitions";
+import { ProfessionalWithColors } from "@/app/lib/types/general";
 import { useMediaQuery } from "react-responsive";
 
-export default function ProfessionalCard({ professional }: { professional: professionalWithColors }) {
+export default function ProfessionalCard({ professional }: { professional: ProfessionalWithColors }) {
 
     const [ topHover, setTopHover] = useState(false)
     const [bottomHover, setBottomHover] = useState(false);

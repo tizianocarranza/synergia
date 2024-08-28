@@ -1,5 +1,4 @@
-import { getUserById } from '@/app/lib/data/read'
-import { organizationWithColors, professionalWithColors } from '@/app/lib/definitions'
+import { getOrganizationById, getProfessionalById } from '@/app/lib/data/read'
 import { auth } from '../../../../../../auth'
 import React from 'react'
 import { LookForPage, MainPage } from '@/app/ui/pages/pages';
@@ -8,15 +7,21 @@ import OrganizationCard from '@/app/ui/cards/organization-card';
 
 async function Page() {
     const session = await auth();
-    const { formattedProfessional, formattedOrganization } = await getUserById(session?.user?.id);
+    let professional, organization;
+
+    if (session?.user.type === "professional") {
+        professional = await getProfessionalById(session?.user.id);
+    } else if (session?.user.type === "organization") {
+        organization = await getOrganizationById(session?.user.id);
+    }
 
     return (
         <MainPage header='Profile (comming up)'>
             {
-                formattedProfessional && <ProfessionalCard professional={formattedProfessional} /> 
+                professional && <ProfessionalCard professional={professional} />
             }
             {
-                formattedOrganization && <OrganizationCard organization={formattedOrganization} /> 
+                organization && <OrganizationCard organization={organization} />
             }
         </MainPage>
     )

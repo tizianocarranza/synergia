@@ -1,6 +1,6 @@
 import userSchema from "./user";
 import mongoose, { Schema } from "mongoose";
-import { specialties } from "../../definitions";
+import { specialties } from "../../types/general";
 
 const professionalSchema = new Schema({
     ...userSchema.obj,

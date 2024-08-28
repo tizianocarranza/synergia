@@ -1,6 +1,6 @@
 "use client"
 
-import { specialties, areas } from "@/app/lib/definitions";
+import { specialties, areas } from "@/app/lib/types/general";
 import { PrimaryButton } from "../buttons/buttons";
 import { organizationSignUpFormAction, OrganizationState, ProfessionalState, professionalSignUpFormAction } from "@/app/lib/data/actions";
 import { useActionState } from "react";
@@ -242,7 +242,7 @@ export function OrganizationSignUpForm() {
 
                 {/* Name */}
                 <div className=" flex flex-col">
-                    <label htmlFor="website">Doe&apos;s the organization have a website?</label>
+                    <label htmlFor="website">Does the organization have a website?</label>
                     <input 
                     type="url" 
                     name="website"

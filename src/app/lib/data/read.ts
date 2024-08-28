@@ -4,7 +4,7 @@ import { dbConnect } from "@/app/lib/config/db"
 import Professionals from "../config/models/professionals"
 import Organizations from "../config/models/organizations"
 import { formatOrganization, formatOrganizations, formatProfessional, formatProfessionals } from "../utils"
-import { organization, organizationWithColors, professional, professionalWithColors } from "../definitions"
+import { Organization, OrganizationWithColors, Professional, ProfessionalWithColors } from "../types/general"
 
 //Professionals
 export const getAllProfessionals = async() => {
@@ -17,6 +17,26 @@ export const getAllProfessionals = async() => {
     {
         console.error("Error while fetching all professionals: ", error)
         throw new Error("Unable to fetch professionals");
+    }
+}
+
+export const getProfessionalById = async (id: string) => {
+    try {
+        await dbConnect();
+
+        let rawProfessional;
+        rawProfessional = await Professionals.findById(id);
+
+        if(!rawProfessional) {
+            throw new Error("Ups! professional not found.");
+        }
+
+        const formattedProfessional = formatProfessional(rawProfessional);
+        return formattedProfessional as ProfessionalWithColors;
+    } catch (error) {
+
+        console.error("Failed to fetch professional: ", error);
+        throw new Error("Failed to fetch professional");
     }
 }
 
@@ -36,6 +56,26 @@ export const getAllOrganizations = async() => {
     }
 }
 
+export const getOrganizationById = async (id: string) => {
+    try {
+        await dbConnect();
+
+        let rawOrganization;
+        rawOrganization = await Organizations.findById(id);
+
+        if(!rawOrganization) {
+            throw new Error("Ups! organization not found.");
+        }
+
+        const formattedOrganization = formatOrganization(rawOrganization);
+        return formattedOrganization as OrganizationWithColors;
+    } catch (error) {
+
+        console.error("Failed to fetch organization: ", error);
+        throw new Error("Failed to fetch organization");
+    }
+}
+
 
 //Profile
 export const getUserById = async (id: string | undefined) => {
@@ -51,11 +91,11 @@ export const getUserById = async (id: string | undefined) => {
             if(!rawUser) throw new Error("Ups! user not found.");
 
             const formattedOrganization = formatOrganization(rawUser);
-            return { formattedOrganization: formattedOrganization as organizationWithColors, formattedProfessional: null };
+            return { formattedOrganization: formattedOrganization as OrganizationWithColors, formattedProfessional: null };
         }
 
         const formattedProfessional = formatProfessional(rawUser);
-        return { formattedProfessional: formattedProfessional as professionalWithColors, formattedOrganization: null };
+        return { formattedProfessional: formattedProfessional as ProfessionalWithColors, formattedOrganization: null };
 
     } catch (error) {
 
@@ -63,6 +103,7 @@ export const getUserById = async (id: string | undefined) => {
         throw new Error("Failed to fetch user");
     }
 }
+
 
 //Login
 export const getUserByEmail = async (email: string) => {
@@ -75,12 +116,12 @@ export const getUserByEmail = async (email: string) => {
         if(!user) {
             user = await Organizations.findOne({ email: email });
 
-            return user as organization;
+            return user as Organization;
         }
 
         if(!user) throw new Error("Ups! Invalid email");
 
-        return user as professional;
+        return user as Professional;
 
     } catch (error) {
 

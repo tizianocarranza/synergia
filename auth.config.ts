@@ -1,14 +1,13 @@
-import type { NextAuthConfig, Session } from 'next-auth';
+import type { NextAuthConfig, Session, User } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import { NextResponse } from 'next/server';
-import { isStringObject } from 'util/types';
  
 export const authConfig = {
   pages: {
     signIn: '/sign-in',
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user }: { token: JWT, user: User }) {
       {/* 
         This callback is called whenever a JSON Web Token is created (i.e. at sign in)
         or updated (i.e whenever a session is accessed in the client). 
@@ -18,9 +17,10 @@ export const authConfig = {
        */}
 
       if (user) {
-        token.id = user.id;
-        token.email = user.email;
-        token.name = user.name;
+        token.id = user.id ?? "";
+        token.name = user.name ?? "";
+        token.email = user.email ?? "";
+        token.type = user.type ?? ""
       }
       return token;
     },
@@ -34,9 +34,10 @@ export const authConfig = {
           The token argument is only available when using the jwt session strategy, and the user argument is only available when using the database session strategy. 
         */}
         
-        session.user.id = typeof(token.id) == "string" ? token.id : "";
+        session.user.id = token.id;
         session.user.email = token.email;
         session.user.name = token.name;
+        session.user.type = token.type;
       }
       // Agrega más propiedades si es necesario
       return session;
@@ -53,6 +54,7 @@ export const authConfig = {
         const isOnProfile = nextUrl.pathname.startsWith("/profile");
         const isOnInbox = nextUrl.pathname.startsWith("/inbox");
         const isOnAccount = nextUrl.pathname.startsWith("/account") || nextUrl.pathname.startsWith("/sign-in") || nextUrl.pathname.startsWith("/sign-up");
+        console.log(auth);
 
         if(isOnAccount) {
           if (isLoggedIn) return NextResponse.redirect(new URL(`/profile/me`, nextUrl));

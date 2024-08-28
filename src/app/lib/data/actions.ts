@@ -4,11 +4,10 @@ import { dbConnect } from "../config/db";
 import Professionals from "../config/models/professionals";
 import Organizations from "../config/models/organizations";
 import { z } from "zod"
-import { areas, specialties } from "../definitions";
+import { areas, specialties } from "../types/general";
 import bcrypt from "bcrypt";
 import { signIn } from "@/../auth";
 import { AuthError } from "next-auth";
-import { error } from "console";
 
 const saltRounds = 10;
 
@@ -103,7 +102,7 @@ export const professionalSignUpFormAction = async (prevState: ProfessionalState,
     }
 
     const hashedPass = await bcrypt.hash(validatedProfessionalFormData.data.password, saltRounds)
-    const professional = { ...validatedProfessionalFormData.data, password: hashedPass};
+    const professional = { ...validatedProfessionalFormData.data, password: hashedPass, type: "professional" };
     
 
     try {
@@ -148,11 +147,11 @@ export const organizationSignUpFormAction = async (prevState: OrganizationState,
     }
 
     const hashedPass = await bcrypt.hash(validatedOrganizationFormData.data.password, saltRounds);
-    const organization = { ...validatedOrganizationFormData.data, password: hashedPass };
+    const organization = { ...validatedOrganizationFormData.data, password: hashedPass, type: "organization" };
 
     try {
         await dbConnect();
-        await Organizations.create({...organization});
+        await Organizations.create({...organization });
 
         return {
             ...prevState,

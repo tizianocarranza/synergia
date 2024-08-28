@@ -1,6 +1,6 @@
 "use client"
 
-import { specialties, areas } from "@/app/lib/definitions";
+import { specialties, areas } from "@/app/lib/types/general";
 import { PrimaryButton } from "../buttons/buttons";
 import { organizationSignUpFormAction, OrganizationState, ProfessionalState, professionalSignUpFormAction } from "@/app/lib/data/actions";
 import { useActionState } from "react";

@@ -22,6 +22,11 @@ const userSchema = new Schema({
         type: String,
         required: false,
     },
+    type: {
+        type: String,
+        enum: ["professional", "organization"],
+        required: true,
+    }
 });
 
 export default userSchema;

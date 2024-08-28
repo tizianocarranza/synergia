@@ -1,5 +1,4 @@
-import { getSession } from "next-auth/react";
-import { areaColors, Area, organizationWithColors, professionalWithColors, Specialty, specialtyColors } from "./definitions";
+import { areaColors, Area, OrganizationWithColors, ProfessionalWithColors, Specialty, specialtyColors } from "./types/general";
 
 export const hexToRGBA = (hex: string, opacity: number) => {
     if (!/^#[0-9A-Fa-f]{6}$/.test(hex)) {
@@ -18,8 +17,9 @@ export const hexToRGBA = (hex: string, opacity: number) => {
 export const formatProfessional = (rawProfesional: any) => {
     const specialty: Specialty = rawProfesional.specialty;
     
-    const formattedProfessional: professionalWithColors = {
+    const formattedProfessional: ProfessionalWithColors = {
         _id: rawProfesional._id ? rawProfesional._id.toString() : "",
+        type: rawProfesional.type,
         name: rawProfesional.name,
         email: rawProfesional.email,
         password: rawProfesional.password,
@@ -38,8 +38,9 @@ export const formatProfessional = (rawProfesional: any) => {
 export const formatOrganization = (rawOrganization: any) => {
     const area: Area = rawOrganization.area;
 
-    const formattedOrganization: organizationWithColors = {
+    const formattedOrganization: OrganizationWithColors = {
         _id: rawOrganization._id ? rawOrganization._id.toString() : "",
+        type: rawOrganization.type,
         name: rawOrganization.name,
         email: rawOrganization.email,
         password: rawOrganization.password,

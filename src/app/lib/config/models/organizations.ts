@@ -1,6 +1,6 @@
 import userSchema from "./user";
 import mongoose, { Schema } from "mongoose";
-import { areas } from "../../definitions";
+import { areas } from "../../types/general";
 
 const organizationSchema = new Schema({
     ...userSchema.obj,

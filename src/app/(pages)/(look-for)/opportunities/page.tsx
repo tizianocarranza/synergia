@@ -1,12 +1,12 @@
 import OrganizationCard from "../../../ui/cards/organization-card";
-import { organizationWithColors } from "@/app/lib/definitions";
+import { OrganizationWithColors } from "@/app/lib/types/general";
 import { LookForPage } from "@/app/ui/pages/pages";
 import { hexToRGBA } from "@/app/lib/utils";
 import { getAllOrganizations } from "@/app/lib/data/read";
 
 
 export default async function Opportunities() {
-    let organizations: organizationWithColors[] = [];
+    let organizations: OrganizationWithColors[] = [];
     organizations = await getAllOrganizations()
 
     return (
