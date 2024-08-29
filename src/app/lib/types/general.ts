@@ -153,7 +153,7 @@ export type User = {
     email: string;
     password: string;
     description: string;
-    type: "Professional" | "Organization";
+    type: "professional" | "organization";
     image?: string;
 }
 export type Professional = User & {
