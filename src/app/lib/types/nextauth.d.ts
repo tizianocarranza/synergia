@@ -27,5 +27,6 @@ declare module "next-auth/jwt" {
     name: string;
     email: string;
     type: "professional" | "organization";
+    image?: string | null;
   }
 }

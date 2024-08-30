@@ -1,11 +1,11 @@
 import React from "react";
 
-export function MainPage({ children, header, text }: Readonly<{ children: React.ReactNode, header: string, text?: string }>) {
+export function MainPage({ children, header, text }: Readonly<{ children: React.ReactNode, header?: string, text?: string }>) {
     return (
         <div className="flex flex-col items-center justify-center w-full min-h-half-screen gap-10 text-center lg:flex-row lg:text-left lg:w-2/3">
-            <div className="flex flex-col lg:flex-1 items-center justify-center gap-5">
+            <div className="flex flex-col lg:flex-1 items-center justify-center gap-5 w-full">
                 <h1 className={`main-page-header w-full ${header == "Synergia" ? "font-bold" : ""}`}>
-                    {header}
+                    {header && header}
                 </h1>
                 {
                     text ? 
@@ -13,7 +13,7 @@ export function MainPage({ children, header, text }: Readonly<{ children: React.
                     ""
                 }
             </div>
-            <div className="flex flex-col lg:flex-1 gap-5 items-center justify-center">
+            <div className="flex flex-col lg:flex-1 gap-5 items-center justify-center w-full">
                 {children}
             </div>
         </div>

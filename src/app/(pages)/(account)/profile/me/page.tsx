@@ -1,9 +1,10 @@
 import { getOrganizationById, getProfessionalById } from '@/app/lib/data/read'
 import { auth } from '../../../../../../auth'
 import React from 'react'
-import { LookForPage, MainPage } from '@/app/ui/pages/pages';
+import { MainPage } from '@/app/ui/pages/pages';
 import ProfessionalCard from '@/app/ui/cards/professional-card';
 import OrganizationCard from '@/app/ui/cards/organization-card';
+import { OrganizationEditProfileForm, ProfessionalEditProfileForm } from '@/app/ui/account/profile-forms';
 
 async function Page() {
     const session = await auth();
@@ -16,14 +17,24 @@ async function Page() {
     }
 
     return (
-        <MainPage header='Profile (comming up)'>
+        <div className='flex justify-center w-full'>
             {
-                professional && <ProfessionalCard professional={professional} />
+                professional && (
+                    <div className='flex flex-col items-center justify-center gap-20 w-80 lg:w-96'>
+                        <ProfessionalCard professional={professional} />
+                        <ProfessionalEditProfileForm professional={professional} />
+                    </div>
+                )
             }
             {
-                organization && <OrganizationCard organization={organization} />
+                organization && (
+                    <div className='flex flex-col items-center justify-center gap-20 w-80 lg:w-96'>
+                        <OrganizationCard organization={organization} />
+                        <OrganizationEditProfileForm organization={organization} />
+                    </div>
+                )
             }
-        </MainPage>
+        </div>
     )
 }
 

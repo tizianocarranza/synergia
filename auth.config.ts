@@ -54,7 +54,6 @@ export const authConfig = {
         const isOnProfile = nextUrl.pathname.startsWith("/profile");
         const isOnInbox = nextUrl.pathname.startsWith("/inbox");
         const isOnAccount = nextUrl.pathname.startsWith("/account") || nextUrl.pathname.startsWith("/sign-in") || nextUrl.pathname.startsWith("/sign-up");
-        console.log(auth);
 
         if(isOnAccount) {
           if (isLoggedIn) return NextResponse.redirect(new URL(`/profile/me`, nextUrl));

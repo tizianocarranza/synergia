@@ -24,7 +24,12 @@ const config: Config = {
         brand: "#40E0D0"
       },
       height: {
-        "half-screen": "50vh"
+        "half-screen": "50vh",
+        "2/3-screen": "66vh"
+      },
+      width: {
+        "300": "300px",
+        "400": "400px"
       },
       minHeight: 
       {
