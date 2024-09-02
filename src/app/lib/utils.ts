@@ -1,4 +1,5 @@
 import { areaColors, Area, OrganizationWithColors, ProfessionalWithColors, Specialty, specialtyColors } from "./types/general";
+import bcrypt from "bcrypt"
 
 export const hexToRGBA = (hex: string, opacity: number) => {
     if (!/^#[0-9A-Fa-f]{6}$/.test(hex)) {

@@ -21,11 +21,12 @@ async function Page() {
                 professional && (
                     <div className='flex flex-col items-center justify-center gap-20 w-2/3'>
 
+                        <div className='flex flex-1 flex-col gap-5 w-80 lg:w-96'>
+                            <ProfessionalCard professional={professional} />
+                        </div>
+                        
                         {/* Buttons */}
                         <div className='flex flex-1 flex-col gap-5 w-80 lg:w-96'>
-                            <ProfessionalCard professional={professional}/>
-                        </div>
-                        <div className='flex flex-1 flex-col items-center gap-5 w-80 lg:w-96'>
                             <ProfessionalEditProfileForm professional={professional} />
                         </div>
 
@@ -34,9 +35,16 @@ async function Page() {
             }
             {
                 organization && (
-                    <div className='flex flex-col items-center justify-center gap-20 w-80 lg:w-96'>
-                        <OrganizationCard organization={organization} />
-                        <OrganizationEditProfileForm organization={organization} />
+                    <div className='flex flex-col items-center justify-center gap-20 w-2/3'>
+
+                        <div className='flex flex-1 flex-col gap-5 w-80 lg:w-96'>
+                            <OrganizationCard organization={organization} />
+                        </div>
+
+                        {/* Buttons */}
+                        <div className='flex flex-1 flex-col gap-5 w-80 lg:w-96'>
+                            <OrganizationEditProfileForm organization={organization} />
+                        </div>
                     </div>
                 )
             }

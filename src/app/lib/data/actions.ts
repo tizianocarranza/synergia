@@ -204,7 +204,7 @@ export type SignInState = {
             } as ProfessionalEditProfileState;
         }
 
-        revalidatePath("/profile/me"); /* Esto funciona tirando un error, por eso no lo puedo poner en el trycatch */
+        revalidatePath("/me"); /* Esto funciona tirando un error, por eso no lo puedo poner en el trycatch */
 
         /* Hay que retornar despues para que se pueda ejecutar el revalidate path */
         return {
@@ -289,7 +289,7 @@ export type SignInState = {
             } as OrganizationEditProfileState;
         }
 
-        revalidatePath("/profile/me"); /* Esto funciona tirando un error, por eso no lo puedo poner en el trycatch */
+        revalidatePath("/me"); /* Esto funciona tirando un error, por eso no lo puedo poner en el trycatch */
 
         /* Hay que retornar despues para que se pueda ejecutar el revalidate path */
         return {

@@ -20,7 +20,7 @@ export const getAllProfessionals = async() => {
     }
 }
 
-export const getProfessionalById = async (id: string) => {
+export const getProfessionalById = async (id: String) => {
     try {
         await dbConnect();
 
@@ -56,7 +56,7 @@ export const getAllOrganizations = async() => {
     }
 }
 
-export const getOrganizationById = async (id: string) => {
+export const getOrganizationById = async (id: String) => {
     try {
         await dbConnect();
 
@@ -78,7 +78,7 @@ export const getOrganizationById = async (id: string) => {
 
 
 //Profile
-export const getUserById = async (id: string | undefined) => {
+export const getUserById = async (id: String | undefined) => {
     try {
         await dbConnect();
 

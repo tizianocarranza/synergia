@@ -51,12 +51,12 @@ export const authConfig = {
         */}
       
       const isLoggedIn = !!auth?.user; /* Esto convierte auth?.user en un valor booleano. Si auth?.user está definido (es decir, el usuario está autenticado), isLoggedIn será true; de lo contrario, será false. */
-        const isOnProfile = nextUrl.pathname.startsWith("/profile");
+        const isOnProfile = nextUrl.pathname.startsWith("/me");
         const isOnInbox = nextUrl.pathname.startsWith("/inbox");
         const isOnAccount = nextUrl.pathname.startsWith("/account") || nextUrl.pathname.startsWith("/sign-in") || nextUrl.pathname.startsWith("/sign-up");
 
         if(isOnAccount) {
-          if (isLoggedIn) return NextResponse.redirect(new URL(`/profile/me`, nextUrl));
+          if (isLoggedIn) return NextResponse.redirect(new URL(`/me`, nextUrl));
           return true
         }
         

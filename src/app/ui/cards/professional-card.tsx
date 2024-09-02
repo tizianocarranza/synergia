@@ -5,10 +5,11 @@ import { useState } from "react";
 import Image from 'next/image';
 import { ProfessionalWithColors } from "@/app/lib/types/general";
 import { useMediaQuery } from "react-responsive";
+import Link from "next/link";
 
 export default function ProfessionalCard({ professional }: { professional: ProfessionalWithColors }) {
 
-    const [ topHover, setTopHover] = useState(false)
+    const [topHover, setTopHover] = useState(false)
     const [bottomHover, setBottomHover] = useState(false);
 
     const [imgSrc, setImgSrc] = useState(professional.image);
@@ -28,29 +29,31 @@ export default function ProfessionalCard({ professional }: { professional: Profe
         setBottomHover(false)
     }
 
-    
+
     const handleImgError = () => {
         setImgSrc("/avatar.svg");
     }
 
 
     return (
-            <div className="relative flex items-center justify-center h-80 w-80 lg:h-96 lg:w-96 rounded-full text-white text-center text-xl list-none transition 300ms ease-in-out" 
-            style={{ backgroundColor:  topHover || bottomHover ? professional.cardColor : "black", border: `5px solid ${professional.color}` }}
+        <Link href={`/${professional._id}`} >
+
+            <div className="relative flex items-center justify-center h-80 w-80 lg:h-96 lg:w-96 rounded-full text-white text-center text-xl list-none transition 300ms ease-in-out"
+                style={{ backgroundColor: topHover || bottomHover ? professional.cardColor : "black", border: `5px solid ${professional.color}` }}
             >
                 <div className="h-5/6 w-5/6 rounded-full overflow-hidden">
-                    <div className="flex flex-col items-center justify-center h-1/2 rounded-t-full lg:hover:h-full transition-all 300ms ease-out" 
-                        onMouseEnter={isDesktop ? handleMouseEnterTop : undefined} 
+                    <div className="flex flex-col items-center justify-center h-1/2 rounded-t-full lg:hover:h-full transition-all 300ms ease-out"
+                        onMouseEnter={isDesktop ? handleMouseEnterTop : undefined}
                         onMouseLeave={isDesktop ? handleMouseLeaveTop : undefined}
                     >
-                        <Image src={imgSrc || "/avatar.svg"} alt="Avatar" onError={handleImgError} width={400} height={400} className={`${ bottomHover ? "h-0" : "h-full"} ${imgSrc == "/avatar.svg" || !imgSrc ? "object-contain" : "object-cover"} w-full transition-all 300ms ease-out`} />
+                        <Image src={imgSrc || "/avatar.svg"} alt="Avatar" onError={handleImgError} width={400} height={400} className={`${bottomHover ? "h-0" : "h-full"} ${imgSrc == "/avatar.svg" || !imgSrc ? "object-contain" : "object-cover"} w-full transition-all 300ms ease-out`} />
                     </div>
-                    <div className="flex justify-center items-center h-1/2 rounded-b-full lg:hover:h-full lg:hover:-translate-y-1/2 transition-all 300ms ease-out" 
+                    <div className="flex justify-center items-center h-1/2 rounded-b-full lg:hover:h-full lg:hover:-translate-y-1/2 transition-all 300ms ease-out"
                         onMouseEnter={isDesktop ? handleMouseEnterBottom : undefined}
                         onMouseLeave={isDesktop ? handleMouseLeaveBottom : undefined}
-                     >
+                    >
                         <div className="flex flex-col justify-center items-center h-full w-10/12 gap-3">
-                        <li className="font-bold">{professional.name}</li>
+                            <li className="font-bold">{professional.name}</li>
                             {
                                 bottomHover ?
                                     (
@@ -66,9 +69,10 @@ export default function ProfessionalCard({ professional }: { professional: Profe
                                         </>
                                     )
                             }
-                            </div>
-                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </Link>
     )
 }
