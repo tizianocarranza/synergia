@@ -1,7 +1,6 @@
 import { getOrganizationById, getProfessionalById } from '@/app/lib/data/read'
 import { auth } from '../../../../../../auth'
 import React from 'react'
-import { MainPage } from '@/app/ui/pages/pages';
 import ProfessionalCard from '@/app/ui/cards/professional-card';
 import OrganizationCard from '@/app/ui/cards/organization-card';
 import { OrganizationEditProfileForm, ProfessionalEditProfileForm } from '@/app/ui/account/profile-forms';
@@ -20,9 +19,16 @@ async function Page() {
         <div className='flex justify-center w-full'>
             {
                 professional && (
-                    <div className='flex flex-col items-center justify-center gap-20 w-80 lg:w-96'>
-                        <ProfessionalCard professional={professional} />
-                        <ProfessionalEditProfileForm professional={professional} />
+                    <div className='flex flex-col items-center justify-center gap-20 w-2/3'>
+
+                        {/* Buttons */}
+                        <div className='flex flex-1 flex-col gap-5 w-80 lg:w-96'>
+                            <ProfessionalCard professional={professional}/>
+                        </div>
+                        <div className='flex flex-1 flex-col items-center gap-5 w-80 lg:w-96'>
+                            <ProfessionalEditProfileForm professional={professional} />
+                        </div>
+
                     </div>
                 )
             }

@@ -23,7 +23,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-        <body className={`flex flex-col items-center h-screen w-screen overflow-x-hidden overflow-y-scroll text-lg font-medium ${epilogue.className}`} >
+        <body className={`relative flex flex-col items-center h-screen w-screen overflow-x-hidden overflow-y-scroll text-lg font-medium ${epilogue.className}`} >
           <Navbar />
           <main className="flex flex-col items-center justify-center w-10/12 mt-28 bg-black">
             {children}

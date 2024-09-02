@@ -61,7 +61,7 @@ export default function OrganizationCard({ organization }: { organization: Organ
                                 bottomHover ?
                                     (
                                         <>
-                                            <li className="flex items-start justify-center max-h-2/3 my-5 text-md overflow-y-scroll scroll-container">
+                                            <li className="flex items-start justify-center max-h-2/3 my-5 text-md scroll-y-container">
                                                 {organization.description}
                                             </li>
                                         </>

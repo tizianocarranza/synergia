@@ -116,6 +116,11 @@ body {
 .form-success {
   @apply mt-3 text-md text-green-300 font-semibold;
 }
-.scroll-container::-webkit-scrollbar {
+
+.scroll-y-container{ 
+  overflow-y: scroll;
+  overscroll-behavior: contain;
+}
+.scroll-y-container::-webkit-scrollbar {
   visibility: hidden;
 }

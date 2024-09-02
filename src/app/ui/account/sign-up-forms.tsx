@@ -43,6 +43,7 @@ export function ProfessionalSignUpForm() {
                         list="specialties"
                         name="specialty"
                         id="specialty"
+                        aria-describedby="specialty-error"
                     />
                     <datalist id="specialties">
                         {specialties.map(specialty => (
@@ -67,6 +68,7 @@ export function ProfessionalSignUpForm() {
                         id="experience"
                         min={1}
                         max={20}
+                        aria-describedby="experience-error"
                     />
                     <div id="experience-error" aria-live="polite" aria-atomic="true">
                         {state.errors?.experience &&
@@ -88,6 +90,7 @@ export function ProfessionalSignUpForm() {
                                 name="employmentStatus"
                                 id="employed"
                                 value="employed"
+                                aria-describedby="employmentStatus-error"
                             />
                             <label htmlFor="employed">Employed</label>
                         </div>
@@ -119,6 +122,7 @@ export function ProfessionalSignUpForm() {
                         id="description"
                         rows={4}
                         minLength={50}
+                        aria-describedby="description-error"
                     />
                     <div id="description-error" aria-live="polite" aria-atomic="true">
                         {state.errors?.description &&
@@ -137,6 +141,7 @@ export function ProfessionalSignUpForm() {
                         type="email"
                         name="email"
                         id="email"
+                        aria-describedby="email-error"
                     />
                     <div id="email-error" aria-live="polite" aria-atomic="true">
                         {state.errors?.email &&
@@ -155,6 +160,7 @@ export function ProfessionalSignUpForm() {
                         type="password"
                         name="password"
                         id="password"
+                        aria-describedby="password-error"
                     />
                     <div id="password-error" aria-live="polite" aria-atomic="true">
                         {state.errors?.password &&

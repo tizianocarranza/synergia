@@ -55,7 +55,7 @@ export default function ProfessionalCard({ professional }: { professional: Profe
                                 bottomHover ?
                                     (
                                         <>
-                                            <li className="flex items-start justify-center max-h-2/3 my-5 text-md overflow-y-scroll scroll-container">
+                                            <li className="flex items-start justify-center max-h-2/3 my-5 text-md scroll-y-container">
                                                 {professional.description}
                                             </li>
                                         </>
