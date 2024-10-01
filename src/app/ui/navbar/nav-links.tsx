@@ -28,7 +28,7 @@ export const SignInLink = () => {
             <div className="flex flex-1 justify-end items-center gap-10">
                 <Link
                     href={currentUrl.startsWith("/sign-in") ? "/sign-up" : "/sign-in"}
-                    className="font-bold text-brand"
+                    className="font-bold"
                 >{currentUrl.startsWith("/sign-in") ? "Sign up" : "Sign in"}</Link>
             </div>
         )

@@ -8,7 +8,7 @@ export default async function Navbar() {
 
 
     return (
-        <header className="fixed flex w-screen h-14 min-h-14 justify-center items-center top-0 left-0 z-50 text-sm font-semibold bg-black bg-opacity-75 backdrop-blur-lg">
+        <header className="fixed flex w-screen h-14 min-h-14 justify-center items-center top-0 left-0 z-50 text-sm font-semibold bg-white">
             {/* Desktop */}
             <div className="grid grid-cols-1 lg:grid-cols-3 items-center w-11/12 h-full  list-none">
                 <div className="hidden lg:block">

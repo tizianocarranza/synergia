@@ -2,7 +2,7 @@ import Link from "next/link"
 
 export function LinkButton({ children, href }: Readonly<{ children: React.ReactNode, href: string }>) {
     return (
-        <Link href={href} className="flex justify-center items-center h-12 w-80 lg:w-full  p-2 rounded-sm bg-white bg-opacity-0 border-2 text-sm text-white hover:bg-opacity-40 hover:text-white transition duration-300 ease-in-out">
+        <Link href={href} className="flex h-16 items-center justify-center bg-brand text-white rounded-lg p-5">
             {children}
         </Link>
     )
@@ -13,8 +13,16 @@ export function PrimaryButton({ children, action, type = "button" }: Readonly<{ 
             <button 
             type={type}
             onClick={action} 
-            className="flex justify-center items-center h-12 w-80 lg:w-full  p-2 rounded-sm bg-white bg-opacity-0 border-2 text-sm text-white hover:bg-opacity-40 hover:text-white transition duration-300 ease-in-out">
+            className="flex h-16 items-center justify-center bg-brand text-white rounded-lg p-5">
                 {children}
             </button>
     )
 } 
+
+
+/* 
+<div className="h-16 bg-brand rounded-lg flex p-5 items-center justify-center">
+    <p className="font-semibold text-white">I want a team!</p>
+</div>
+
+*/

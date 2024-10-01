@@ -17,11 +17,17 @@ const config: Config = {
         sans: ["Epilogue", "sans-serif"]
       },
       fontSize: {
-        md: "1rem",
-        "15xl": "110px"
+        "md": "1rem",
+        "15xl": "110px",
+        "big": "100px",
+				"bigger": "140px",
+				"extra-big": "150px",
+				"giant": "170px",
+        "ultra": "250px"
       },
       colors: {
-        brand: "#40E0D0"
+        "brand": "#6C63FF",
+        "accent": "#50D1B2"
       },
       height: {
         "half-screen": "50vh",
