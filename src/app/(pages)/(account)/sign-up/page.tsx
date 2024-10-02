@@ -5,12 +5,14 @@ export default function SignUp() {
 
   return (
     <MainPage header="Create an account">
-      <LinkButton href="/sign-up/organization">
-        <p>I represent an <span className="text-brand">organization</span></p>
-      </LinkButton>
-      <LinkButton href="/sign-up/professional">
-        <p>I&apos;m a <span className="text-brand">professional</span></p>
-      </LinkButton>
+      <div className="flex flex-col gap-5">
+        <LinkButton href="/sign-up/organization">
+          <p>I represent an <span className="text-accent">organization</span></p>
+        </LinkButton>
+        <LinkButton href="/sign-up/professional">
+          <p>I&apos;m a <span className="text-accent">professional</span></p>
+        </LinkButton>
+      </div>
     </MainPage>
   );
 }

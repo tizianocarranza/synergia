@@ -38,8 +38,8 @@ export default function ProfessionalCard({ professional }: { professional: Profe
     return (
         <Link href={`/${professional._id}`} >
 
-            <div className="relative flex items-center justify-center h-80 w-80 lg:h-96 lg:w-96 rounded-full text-white text-center text-xl list-none transition 300ms ease-in-out"
-                style={{ backgroundColor: topHover || bottomHover ? professional.cardColor : "black", border: `5px solid ${professional.color}` }}
+            <div className="relative flex items-center justify-center h-80 w-80 lg:h-96 lg:w-96 rounded-full text-black text-center text-xl list-none transition 300ms ease-in-out"
+                style={{ backgroundColor: topHover || bottomHover ? professional.cardColor : "white", border: `5px solid ${professional.color}` }}
             >
                 <div className="h-5/6 w-5/6 rounded-full overflow-hidden">
                     <div className="flex flex-col items-center justify-center h-1/2 rounded-t-full lg:hover:h-full transition-all 300ms ease-out"

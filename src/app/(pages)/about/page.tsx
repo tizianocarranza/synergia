@@ -3,7 +3,6 @@ import { MainPage } from "@/app/ui/pages/pages";
 export default function Account() {
 
     return (
-
         <MainPage
             header="Synergia? Whaaat!?"
         >
@@ -15,3 +14,4 @@ export default function Account() {
 
     );
 }
+

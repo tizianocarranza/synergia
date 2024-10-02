@@ -42,8 +42,8 @@ export default function OrganizationCard({ organization }: { organization: Organ
     return (
         <Link href={`/${organization._id}`} >
             <div 
-                className="relative flex items-center justify-center h-80 w-80 lg:h-96 lg:w-96 rounded-md text-white text-center text-xl list-none transition 300ms ease-in-out" 
-                style={{ backgroundColor: topHover || bottomHover ? organization.cardColor : "black", border: `5px solid ${organization.color}` }}
+                className="relative flex items-center justify-center h-80 w-80 lg:h-96 lg:w-96 rounded-md text-black text-center text-xl list-none transition 300ms ease-in-out" 
+                style={{ backgroundColor: topHover || bottomHover ? organization.cardColor : "white", border: `5px solid ${organization.color}` }}
                 >
                 <div className="relative h-5/6 w-5/6 rounded-md overflow-hidden">
                     <div className="flex flex-col items-center justify-center h-1/2 rounded-t-full lg:hover:h-full transition-all 300ms ease-out" 

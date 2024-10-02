@@ -9,8 +9,8 @@ export default function SignInForm() {
     const [state /* este es el state */, formAction, isPending] = useActionState(autheticationFormAction, initialState)
 
     return (
-        <form action={formAction} className="flex flex-col gap-14 w-80">
-            <div className="flex flex-col gap-8">
+        <form action={formAction} className="flex flex-col gap-14 w-80 items-center">
+            <div className="flex flex-col gap-8 w-full">
                 <div className="flex flex-col">
                     <label htmlFor="email">Write your email</label>
                     <input type="email" name="email" id="email" required/>
@@ -22,7 +22,7 @@ export default function SignInForm() {
             </div>
             <div className="div" aria-disabled={isPending}>
                 <PrimaryButton type="submit">
-                    <p className="text-brand">Sign in to your account</p>
+                    <p className="">Sign in to your account</p>
                 </PrimaryButton>
                 {
                     state.error && (

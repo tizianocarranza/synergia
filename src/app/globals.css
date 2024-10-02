@@ -80,7 +80,7 @@
 }
 
 .main-page-header {
-  @apply text-brand text-4xl lg:text-6xl text-center lg:text-left;
+  @apply text-brand text-4xl lg:text-6xl text-center;
 }
 
 .look-for-page-header {

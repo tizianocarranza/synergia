@@ -2,21 +2,23 @@ import React from "react";
 
 export function MainPage({ children, header, text }: Readonly<{ children: React.ReactNode, header?: string, text?: string }>) {
     return (
-        <div className="flex flex-col items-center justify-center w-full min-h-half-screen gap-10 text-center lg:flex-row lg:text-left lg:w-2/3">
-            <div className="flex flex-col lg:flex-1 items-center justify-center gap-5 w-full">
-                <h1 className={`main-page-header w-full ${header == "Synergia" ? "font-bold" : ""}`}>
+        <section className="w-full">
+        <div className="flex flex-col gap-20 items-center pt-28">
+          <div className="flex flex-col gap-3 items-center w-3/4">
+                <h1 className={`main-page-header ${header == "Synergia" ? "font-bold" : ""}`}>
                     {header && header}
                 </h1>
                 {
                     text ? 
-                    ( <p className="w-full">{text}</p> ) : 
+                    ( <p>{text}</p> ) : 
                     ""
                 }
             </div>
-            <div className="flex flex-col lg:flex-1 gap-5 items-center justify-center w-full">
+            <div>
                 {children}
             </div>
         </div>
+        </section>
     )
 }
 

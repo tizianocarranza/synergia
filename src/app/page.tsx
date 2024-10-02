@@ -103,7 +103,7 @@ export default function Page() {
         <div className="flex flex-col w-full justify-center items-center gap-8">
 
           <div className="h-16 w-full flex gap-10 justify-center">
-            <h2 className="text-brand text-5xl font-bold align-text-bottom">{userType === "professional" ? `I'm a professional` : `I'm a recruiter`}</h2>
+            <h2 className=" text-5xl font-bold align-text-bottom">{userType === "professional" ? `I'm a professional` : `I'm a recruiter`}</h2>
             <PrimaryButton type="button" action={handleChangeUserType}>
               <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_15_21)">
@@ -153,10 +153,10 @@ export default function Page() {
       text="Where developers find opportunities and organizations find talents."
     >
         <LinkButton href="/opportunities">
-          <p>Look for <span className="text-brand">opportunities</span> </p>
+          <p>Look for <span className="">opportunities</span> </p>
         </LinkButton>
         <LinkButton href="/professionals">
-          <p>Look for <span className="text-brand">professionals</span> </p>
+          <p>Look for <span className="">professionals</span> </p>
         </LinkButton>
 </MainPage> 
   */

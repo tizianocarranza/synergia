@@ -14,7 +14,7 @@ export function ProfessionalSignUpForm() {
     const [state, formAction] = useActionState(professionalSignUpFormAction, initialState);
 
     return (
-        <form action={formAction} className="flex flex-col gap-14 w-80">
+        <form action={formAction} className="flex flex-col gap-14 w-80 items-center">
             <div className="flex flex-col gap-8">
 
                 {/* Name */}
@@ -173,9 +173,9 @@ export function ProfessionalSignUpForm() {
             </div>
 
         
-            <div>
+            <div className="flex flex-col gap-2 items-center">
                 <PrimaryButton type="submit">
-                    <p className="text-brand">Create account</p>
+                    <p className="">Create account</p>
                 </PrimaryButton>
 
                 {state.message && (
@@ -196,7 +196,7 @@ export function OrganizationSignUpForm() {
     const [state, formAction] = useActionState(organizationSignUpFormAction, initialState);
 
     return (
-        <form action={formAction} className="flex flex-col gap-14 w-80">
+        <form action={formAction} className="flex flex-col gap-14 w-80 items-center">
             <div className="flex flex-col gap-8">
 
                 {/* Name */}
@@ -331,9 +331,9 @@ export function OrganizationSignUpForm() {
             </div>
 
 
-            <div>
+            <div className="flex flex-col gap-2 items-center">
                 <PrimaryButton type="submit">
-                    <p className="text-brand">Create account</p>
+                    <p className="">Create account</p>
                 </PrimaryButton>
 
                 {
