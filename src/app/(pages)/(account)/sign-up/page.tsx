@@ -7,10 +7,10 @@ export default function SignUp() {
     <MainPage header="Create an account">
       <div className="flex flex-col gap-5">
         <LinkButton href="/sign-up/organization">
-          <p>I represent an <span className="text-accent">organization</span></p>
+          I represent anorganization
         </LinkButton>
         <LinkButton href="/sign-up/professional">
-          <p>I&apos;m a <span className="text-accent">professional</span></p>
+          I&apos;m a professional
         </LinkButton>
       </div>
     </MainPage>

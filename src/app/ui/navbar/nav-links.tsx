@@ -28,7 +28,7 @@ export const SignInLink = () => {
             <div className="flex flex-1 justify-end items-center gap-10">
                 <Link
                     href={currentUrl.startsWith("/sign-in") ? "/sign-up" : "/sign-in"}
-                    className="font-bold"
+                    className="font-bold hover-underline"
                 >{currentUrl.startsWith("/sign-in") ? "Sign up" : "Sign in"}</Link>
             </div>
         )
@@ -47,7 +47,7 @@ export const SignOutLink = () => {
     return (
         shouldRenderAuthButtons && (
             <div className="flex flex-1 justify-end items-center gap-10">
-                <button className="font-bold text-brand">Sign Out</button>
+                <button className="font-bold text-brand hover-underline">Sign Out</button>
             </div>
         )
     )

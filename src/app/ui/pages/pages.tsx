@@ -2,8 +2,7 @@ import React from "react";
 
 export function MainPage({ children, header, text }: Readonly<{ children: React.ReactNode, header?: string, text?: string }>) {
     return (
-        <section className="w-full">
-        <div className="flex flex-col gap-20 items-center pt-28">
+        <section className="flex flex-col gap-28 items-center pt-28 w-11/12 lg:w-5/6 xl:w-2/3 min-h-screen">
           <div className="flex flex-col gap-3 items-center w-3/4">
                 <h1 className={`main-page-header ${header == "Synergia" ? "font-bold" : ""}`}>
                     {header && header}
@@ -14,21 +13,20 @@ export function MainPage({ children, header, text }: Readonly<{ children: React.
                     ""
                 }
             </div>
-            <div>
+            <div className="w-full flex flex-col gap-10 items-center">
                 {children}
             </div>
-        </div>
         </section>
     )
 }
 
 export function LookForPage({ children, header }: Readonly<{ children: React.ReactNode, header: string }>) {
     return(
-        <div className="w-full">
-        <h1 className="look-for-page-header">{header}</h1>
-            <div className="flex-1 w-full items-center justify-center justify-items-center lg:gap-14" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(384px, 1fr))", gridAutoRows: "384px" }}>
+        <section className="flex flex-col gap-28 items-center pt-36 w-11/12 lg:w-5/6 xl:w-2/3 min-h-screen">
+        <h1 className="main-page-header">{header}</h1>
+            <div className="flex-1 w-full items-center justify-center justify-items-center lg:gap-14" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(384px, 1fr))", gridAutoRows: "384px" }}>
                 {children}
             </div>
-        </div>
+        </section>
     )
 }

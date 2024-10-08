@@ -15,6 +15,7 @@ export function ProfessionalSignUpForm() {
 
     return (
         <form action={formAction} className="flex flex-col gap-14 w-80 items-center">
+            <h1 className="text-xl font-semibold text-accent p-2 rounded-lg bg-brand">Create your professional&apos;s account.</h1>
             <div className="flex flex-col gap-8">
 
                 {/* Name */}
@@ -197,6 +198,7 @@ export function OrganizationSignUpForm() {
 
     return (
         <form action={formAction} className="flex flex-col gap-14 w-80 items-center">
+            <h1 className="text-xl font-semibold text-accent p-2 rounded-lg bg-brand">Create your organization&apos;s account.</h1>
             <div className="flex flex-col gap-8">
 
                 {/* Name */}

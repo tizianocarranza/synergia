@@ -4,7 +4,7 @@ import { MainPage } from "@/app/ui/pages/pages";
 export default function OrganizationSignUp() {
 
   return (
-    <MainPage header="Create an organization account">
+    <MainPage header="Welcome recruiter!">
         <OrganizationSignUpForm />
     </MainPage>
   );

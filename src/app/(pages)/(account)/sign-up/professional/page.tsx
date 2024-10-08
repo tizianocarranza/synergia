@@ -4,7 +4,7 @@ import { MainPage } from "@/app/ui/pages/pages";
 export default function ProfessionalSignUp() {
 
   return (
-    <MainPage header="Create a professional account">
+    <MainPage header="Welcome professional!">
         <ProfessionalSignUpForm />
     </MainPage>
   );

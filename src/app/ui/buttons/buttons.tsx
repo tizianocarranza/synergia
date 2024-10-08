@@ -2,7 +2,7 @@ import Link from "next/link"
 
 export function LinkButton({ children, href }: Readonly<{ children: React.ReactNode, href: string }>) {
     return (
-        <Link href={href} className="flex h-16 items-center justify-center bg-brand text-white rounded-lg p-5">
+        <Link href={href} className="flex h-16 items-center justify-center bg-brand text-white rounded-lg p-5 hover:bg-accent transition-colors text-sm font-semibold">
             {children}
         </Link>
     )
@@ -13,7 +13,7 @@ export function PrimaryButton({ children, action, type = "button" }: Readonly<{ 
             <button 
             type={type}
             onClick={action} 
-            className="flex h-16 items-center justify-center bg-brand text-white rounded-lg p-5">
+            className="flex h-16 items-center justify-center bg-brand text-white rounded-lg p-5 hover:bg-accent transition-colors text-sm font-semibold">
                 {children}
             </button>
     )
