@@ -17,7 +17,7 @@ async function Page() {
     }
 
     return (
-        <MainPage header='My profile'>
+        <MainPage header={professional ? professional.name : organization ? organization.name : "My profile"}>
             {
                 professional && (
                     <div className='flex flex-col items-center justify-center gap-20 w-2/3'>

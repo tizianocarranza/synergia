@@ -2,6 +2,7 @@ import React from 'react'
 import { getProfessionalById, getOrganizationById, getUserById } from '@/app/lib/data/read';
 import ProfessionalCard from '@/app/ui/cards/professional-card';
 import OrganizationCard from '@/app/ui/cards/organization-card';
+import { MainPage } from '@/app/ui/pages/pages';
 
 async function Page({ params }: { params: { id: String }}) {
 
@@ -10,7 +11,7 @@ async function Page({ params }: { params: { id: String }}) {
     
 
   return (
-    <div className='flex justify-center w-full'>
+    <MainPage header={user.formattedProfessional ? user.formattedProfessional.name : user.formattedOrganization.name}>
     {
         user.formattedProfessional && (
             <div className='flex flex-col items-center justify-center gap-20 w-2/3'>
@@ -29,7 +30,7 @@ async function Page({ params }: { params: { id: String }}) {
             </div>
         )
     }
-</div>
+</MainPage>
   )
 }
 
