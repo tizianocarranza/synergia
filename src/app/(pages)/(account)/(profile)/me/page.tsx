@@ -4,6 +4,7 @@ import React from 'react'
 import ProfessionalCard from '@/app/ui/cards/professional-card';
 import OrganizationCard from '@/app/ui/cards/organization-card';
 import { OrganizationEditProfileForm, ProfessionalEditProfileForm } from '@/app/ui/account/profile-forms';
+import { MainPage } from '@/app/ui/pages/pages';
 
 async function Page() {
     const session = await auth();
@@ -16,7 +17,7 @@ async function Page() {
     }
 
     return (
-        <div className='flex justify-center w-full'>
+        <MainPage header='My profile'>
             {
                 professional && (
                     <div className='flex flex-col items-center justify-center gap-20 w-2/3'>
@@ -48,7 +49,7 @@ async function Page() {
                     </div>
                 )
             }
-        </div>
+        </MainPage>
     )
 }
 
