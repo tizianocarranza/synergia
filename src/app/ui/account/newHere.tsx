@@ -3,7 +3,7 @@ import React from 'react'
 import { useState } from 'react';
 import { PrimaryButton, LinkButton } from '../buttons/buttons';
 
-function newHere() {
+function NewHere() {
     const [userType, setUserType] = useState("professional");
 
     const handleChangeUserType = () => {
@@ -62,4 +62,4 @@ function newHere() {
     )
 }
 
-export default newHere
+export default NewHere;
