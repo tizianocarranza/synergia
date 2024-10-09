@@ -30,6 +30,15 @@
     -webkit-text-fill-color: #ffffff;
   };
 
+  ::selection {
+    background-color: theme("colors.brand");
+    color: white;
+  }
+
+  footer::selection {
+    color: theme("colors.accent");
+  }
+
   ul, li {
     list-style: none;
   }

@@ -2,7 +2,7 @@ import Link from "next/link"
 
 export default function Footer() {
     return (
-        <footer className={`w-full bg-brand text-white flex flex-col pt-16 px-5 pb-2 gap-32`}>
+        <footer className={`w-full bg-brand text-white flex flex-col pt-16 px-5 pb-2 gap-32 selection:text-accent`}>
 
             <div className="w-full grid gap-20 lg:grid-cols-2 items-center justify-center pt-10">
 
