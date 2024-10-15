@@ -48,7 +48,7 @@ export default function ProfessionalCard({ professional }: { professional: Profe
                     >
                         <Image src={imgSrc || "/avatar.svg"} alt="Avatar" onError={handleImgError} width={400} height={400} className={`${bottomHover ? "h-0" : "h-full"} ${imgSrc == "/avatar.svg" || !imgSrc ? "object-contain" : "object-cover"} w-full transition-all 300ms ease-out`} />
                     </div>
-                    <div className="flex justify-center items-center h-1/2 rounded-b-full lg:hover:h-full lg:hover:-translate-y-1/2 transition-all 300ms ease-out"
+                    <div className="flex justify-center items-center h-1/2 rounded-b-full lg:hover:h-full lg:hover:text-white lg:hover:-translate-y-1/2 transition-all 300ms ease-out"
                         onMouseEnter={isDesktop ? handleMouseEnterBottom : undefined}
                         onMouseLeave={isDesktop ? handleMouseLeaveBottom : undefined}
                     >

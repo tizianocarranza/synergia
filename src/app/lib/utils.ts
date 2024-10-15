@@ -15,6 +15,8 @@ export const hexToRGBA = (hex: string, opacity: number) => {
     return `rgba(${r}, ${g}, ${b}, ${opacity})`;
 }
 
+
+const CARD_BG_OPACITY = 0.7;
 export const formatProfessional = (rawProfesional: any) => {
     const specialty: Specialty = rawProfesional.specialty;
     
@@ -30,7 +32,7 @@ export const formatProfessional = (rawProfesional: any) => {
         employmentStatus: rawProfesional.employmentStatus,
         specialty: specialty,
         color: specialtyColors[specialty],
-        cardColor: hexToRGBA(specialtyColors[specialty], 0.4),
+        cardColor: hexToRGBA(specialtyColors[specialty], CARD_BG_OPACITY),
     }
 
     return formattedProfessional;
@@ -50,7 +52,7 @@ export const formatOrganization = (rawOrganization: any) => {
         website: rawOrganization.website || undefined,
         area: area,
         color: areaColors[area],
-        cardColor: hexToRGBA(areaColors[area], 0.4),
+        cardColor: hexToRGBA(areaColors[area], CARD_BG_OPACITY),
     }
 
     return formattedOrganization;

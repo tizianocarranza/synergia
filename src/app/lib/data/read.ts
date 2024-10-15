@@ -9,6 +9,8 @@ import { Organization, OrganizationWithColors, Professional, ProfessionalWithCol
 //Professionals
 export const getAllProfessionals = async() => {
     try {
+        await new Promise((resolve) => setTimeout(resolve, 5000));
+        
         await dbConnect();
         const rawProfessionals = await Professionals.find({});
         const formattedProfessionals = formatProfessionals(rawProfessionals);
