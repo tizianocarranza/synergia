@@ -4,72 +4,62 @@
 
 .element {
     animation: breath 1000ms ease-in-out both infinite;
-    @apply h-2 w-2 rounded-full;
+    @apply h-2 w-2 rounded-full bg-brand;
 }
 
 .element:nth-child(1) {
     animation-delay: 100ms;
-    @apply bg-brand;
 }
 
 .element:nth-child(2) {
     animation-delay: 200ms;
-    @apply bg-brand;
 }
 
 .element:nth-child(3) {
     animation-delay: 300ms;
-    @apply bg-brand;
 }
 
 .element:nth-child(4) {
     animation-delay: 400ms;
-    @apply bg-brand;
 }
 
 .element:nth-child(5) {
     animation-delay: 500ms;
-    @apply bg-brand;
 }
 
 .element:nth-child(6) {
     animation-delay: 600ms;
-    @apply bg-brand;
 }
 
 .element:nth-child(7) {
     animation-delay: 700ms;
-    @apply bg-brand;
 }
 
 .element:nth-child(8) {
     animation-delay: 800ms;
-    @apply bg-brand;
 }
 
 .element:nth-child(9) {
     animation-delay: 900ms;
-    @apply bg-brand;
 }
 
 .element:nth-child(10) {
     animation-delay: 1000ms;
-    @apply bg-brand;
 }
 
 .element:nth-child(11) {
     animation-delay: 1100ms;
-    @apply bg-brand;
 }
 
 .element:nth-child(12) {
     animation-delay: 1200ms;
-    @apply bg-brand;
 }
+
 
 
 @keyframes breath {
     from {
+        background-color: theme("colors.brand");
         opacity: 100%;
         transform: scale(1);
     }
