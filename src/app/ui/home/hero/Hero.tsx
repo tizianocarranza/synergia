@@ -9,11 +9,11 @@ import teamwork from "../../../../../public/teamwork.svg"
 function Hero() {
   return (
 
-    <section className="min-h-screen flex flex-col gap-24 lg:gap-10 justify-center items-center lg:flex-row lg:justify-between w-full lg:px-20">
+    <section className="min-h-screen flex flex-col gap-24 px-4 lg:gap-10 justify-center items-center lg:flex-row lg:justify-between w-full lg:px-20">
 
       <div className="flex items-center justify-center flex-col gap-10 lg:items-start">
         <div className="flex flex-col gap-3">
-          <h1 className=" font-bold text-4xl text-center md:text-5xl lg:text-7xl lg:text-left">Bringing talent together.</h1>
+          <h1 className="font-bold text-4xl text-center md:text-5xl lg:text-7xl lg:text-left">Bringing talent together.</h1>
           <p className='text-sm lg:text-left'>Where connections lead to collaborations, and collaborations turn into limitless possibilities.</p>
         </div>
         <div className="flex gap-3 justify-center lg:justify-start">

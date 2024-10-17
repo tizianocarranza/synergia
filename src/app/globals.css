@@ -102,8 +102,8 @@
   @apply  text-4xl lg:text-6xl text-center font-bold;
 }
 
-.look-for-page-header {
-  @apply text-4xl lg:text-6xl text-center mb-14 lg:mb-28;
+.alternative-main-page-header {
+  @apply text-4xl lg:text-6xl text-center font-bold px-5 py-2 rounded-md text-white bg-brand;
 }
 
 .card-bottom-selected {

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react";
+import clsx from "clsx";
 
 import { useMediaQuery } from "react-responsive";
 
@@ -41,10 +42,10 @@ export default function OrganizationCard({ organization }: { organization: Organ
 
     return (
         <Link href={`/${organization._id}`} >
-            <div 
-                className="relative flex items-center justify-center h-80 w-80 lg:h-96 lg:w-96 rounded-md text-black text-center text-xl list-none transition 300ms ease-in-out" 
-                style={{ backgroundColor: topHover || bottomHover ? organization.cardColor : "white", border: `5px solid ${organization.color}` }}
-                >
+            <div className={clsx({
+                ["relative flex items-center justify-center h-80 w-80 lg:h-96 lg:w-96 rounded-md text-black text-center text-xl shadow-md shadow-brand list-none transition-all 300ms ease-in-out hover:shadow-lg hover:shadow-accent"]: true,
+                /* ["opacity-40 shadow-black hover:shadow-black hover:shadow-md"]: (organization.employmentStatus === "employed") */
+            })}>
                 <div className="relative h-5/6 w-5/6 rounded-md overflow-hidden">
                     <div className="flex flex-col items-center justify-center h-1/2 rounded-t-full lg:hover:h-full transition-all 300ms ease-out" 
                         onMouseEnter={isDesktop ? handleMouseEnterTop : undefined} 
@@ -52,7 +53,7 @@ export default function OrganizationCard({ organization }: { organization: Organ
                         >
                         <Image src={imgSrc || "/building.svg"} alt="Avatar" onError={handleImgError} width={400} height={400} className={`${bottomHover ? "h-0" : "h-full"} ${imgSrc == "/building.svg" || !imgSrc ? "object-contain" : "object-cover"} w-full transition-all 300ms ease-out`} />
                     </div>
-                    <div className="flex justify-center items-center h-1/2 rounded-b-full lg:hover:h-full lg:hover:text-white lg:hover:-translate-y-1/2 transition-all 300ms ease-out" 
+                    <div className="flex justify-center items-center h-1/2 rounded-b-full lg:hover:h-full lg:hover:-translate-y-1/2 transition-all 300ms ease-out" 
                         onMouseEnter={isDesktop ? handleMouseEnterBottom : undefined} 
                         onMouseLeave={isDesktop ? handleMouseLeaveBottom : undefined}
                     >
@@ -68,7 +69,7 @@ export default function OrganizationCard({ organization }: { organization: Organ
                                         </>
                                     ) : (
                                         <>
-                                            <li><span className="font-bold p-1 text-md" style={{ background: organization.color }}>{organization.area}</span></li>
+                                            <li><span className="font-bold p-1 text-md" style={{ color: organization.color }}>{organization.area}</span></li>
                                         </>
                                     )
                                 }
