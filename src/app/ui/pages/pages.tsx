@@ -1,20 +1,16 @@
 import React from "react";
 import { LinkButton } from "@/app/ui/buttons/buttons";
 
-export function MainPage({ children, header, text }: Readonly<{ children: React.ReactNode, header?: string, text?: string }>) {
+export function MainPage({ header, text, children }: Readonly<{ header: React.ReactNode, text?: string, children: React.ReactNode }>) {
     return (
-        <section className="flex flex-col gap-28 items-center pt-28 w-11/12 lg:w-5/6 xl:w-2/3 min-h-screen">
-            <div className="flex flex-col gap-3 items-center w-3/4">
-                <h1 className={`main-page-header ${header == "Synergia" ? "font-bold" : ""}`}>
-                    {header && header}
+        <section className="flex flex-col items-start gap-10 w-full max-w-6xl mx-auto px-5 pt-10 pb-20 min-h-[60vh]">
+            <div className="flex flex-col items-start gap-4 w-full">
+                <h1 className="display text-5xl sm:text-7xl lg:text-8xl break-words">
+                    {header}
                 </h1>
-                {
-                    text ?
-                        (<p>{text}</p>) :
-                        ""
-                }
+                {text && <p className="text-lg max-w-2xl">{text}</p>}
             </div>
-            <div className="w-full flex flex-col gap-10 items-center">
+            <div className="w-full">
                 {children}
             </div>
         </section>

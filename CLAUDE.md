@@ -11,9 +11,10 @@ pnpm install
 pnpm dev      # next dev, http://localhost:3000
 pnpm build    # next build (también hace type-check)
 pnpm lint     # eslint . (flat config en eslint.config.mjs, extiende eslint-config-next/core-web-vitals)
+pnpm test     # runner nativo de Node sobre src/**/*.test.ts
 ```
 
-No hay tests. Para verificar un cambio: `pnpm lint`, `pnpm build` y probarlo en el navegador.
+`pnpm test` usa `node --test` con TypeScript nativo (los tests importan con extensión `.ts`). Solo cubre las libs puras: `lib/search.test.ts`, `lib/initials.test.ts` y `lib/home-stats.test.ts`. No hay tests de UI. Para verificar un cambio: `pnpm test`, `pnpm lint`, `pnpm build` y probarlo en el navegador a 1280px y 390px de ancho.
 
 - `bcrypt` (v6) trae binarios precompilados y se carga con `node-gyp-build`. Igual, `package.json` mantiene `pnpm.onlyBuiltDependencies` para que pnpm 10 ejecute su script de install.
 
@@ -27,7 +28,7 @@ Copiar `.env.example` a `.env`:
 ## Stack
 
 - Next `16` (App Router, carpeta `src/`, Turbopack), React `19`, next-auth `5.0.0-beta.32` (v5 sigue en beta), TypeScript 6.
-- Mongoose 9, Zod 4, bcrypt 6, Tailwind 4, ESLint 9, `clsx`, `react-responsive`.
+- Mongoose 9, Zod 4, bcrypt 6, Tailwind 4, ESLint 9, `clsx`. Para lo responsive se usan los breakpoints de Tailwind (no hay `useMediaQuery`).
 - APIs de Next 16: `params` y `searchParams` son Promises (`{ params }: { params: Promise<{ id: string }> }` y luego `await params`); `headers()` y `cookies()` también son async. `useActionState` se importa de `react`.
 - TypeScript se queda en 6.x y ESLint en 9.x porque typescript-eslint y los plugins de eslint-config-next todavía no soportan TS 7 ni ESLint 10.
 - Alias de imports: `@/*` → `src/*`. `auth.ts` está en la raíz (fuera de `src`), así que se importa con rutas relativas (`../../../../auth`) o `@/../auth`.
@@ -51,7 +52,8 @@ Copiar `.env.example` a `.env`:
 - `lib/utils.ts`: `formatProfessional(s)` y `formatOrganization(s)` convierten los documentos de Mongoose en objetos planos serializables (`_id` como string) y añaden `color` y `cardColor` (con `hexToRGBA` y opacidad 0.7). Las páginas siempre trabajan con `*WithColors`.
 
 ### Capa de servidor
-- `lib/data/read.ts` (`"use server"`): `getAll*`, `get*ById`, `getUserById` (devuelve `{ formattedProfessional, formattedOrganization }`, uno de los dos es null) y `getUserByEmail`. Los errores se loguean y se relanzan con un mensaje genérico.
+- `lib/data/read.ts` (`"use server"`): `getAll*`, `get*ById`, `getUserById` (devuelve `{ formattedProfessional, formattedOrganization }`, uno de los dos es null) y `getUserByEmail`. Para los listados y la home: `searchProfessionals`, `searchOrganizations`, `getTopSpecialties`, `getTopAreas` y `getHomeStats`. Los errores se loguean y se relanzan con un mensaje genérico.
+- Libs puras (con tests): `lib/search.ts` convierte los `searchParams` de la URL (`q`, `specialty`, `exp`, `open`, `area`) en filtros validados y en queries de Mongo (el texto se escapa como literal; valores inválidos se ignoran, si se repiten se toma el primero) y arma los links con `buildSearchHref`. `lib/initials.ts` saca las iniciales para el avatar. `lib/home-stats.ts` calcula `HomeStats` con `summarizeHomeStats`.
 - `lib/data/actions.ts` (`"use server"`): server actions de formularios.
 
 ### Patrón para formularios (seguirlo para formularios nuevos)
@@ -65,25 +67,29 @@ Copiar `.env.example` a `.env`:
 ### Routing y UI
 ```
 src/app/
-  layout.tsx            Navbar fija + <main> + Footer, fuente Epilogue local
-  page.tsx              Home (Hero)
+  layout.tsx            Navbar sticky (h-16) + <main> + Footer, fuente Epilogue local
+  page.tsx              Home (Hero + bento de stats + band)
   (pages)/
     loading.tsx         Loader animado
     about/  inbox/      inbox es un placeholder
-    (look-for)/professionals, opportunities   listados de cards (LookForPage)
-    (account)/account, sign-in, sign-up/{professional,organization}
-    (account)/(profile)/me     perfil propio con modal de edición
-    (account)/(profile)/[id]   perfil público por _id (professional u organization)
-  ui/                   componentes por dominio (account, buttons, cards, navbar, pages, ...)
+    (look-for)/professionals, opportunities   listados de cards (LookForPage + SearchFilters)
+    (account)/account, sign-in, sign-up/{professional,organization}   usan AuthLayout
+    (account)/(profile)/me     perfil propio (ProfileView + modal de edición)
+    (account)/(profile)/[id]   perfil público por _id (ProfileView)
+  ui/                   componentes por dominio (account, avatar, buttons, cards, footer, home, loader, navbar, pages, profile, search, tag)
 ```
-- Para páginas nuevas, usar los contenedores de `ui/pages/pages.tsx`: `MainPage` (header y texto opcionales) o `LookForPage` (header, buscador/filtros y grid de cards de 384px).
-- Botones: `LinkButton` (navegación) y `PrimaryButton` (con `action` y `type`) en `ui/buttons/buttons.tsx`.
-- Cards (`ui/cards/*`): componentes cliente. Cada una enlaza a `/{_id}`. En desktop (≥1024px, con `useMediaQuery`) se expanden al hacer hover para mostrar la descripción. Imágenes de respaldo: `/avatar.svg` y `/building.svg`. Las cards de professionals con estado `employed` se muestran con opacidad reducida.
-- Estilos: Tailwind 4 configurado en CSS: los tokens están en el bloque `@theme` de `globals.css` (`brand #6C63FF`, `accent #50D1B2`, tamaños `15xl`, `big`, etc.). Las clases reutilizables están en `globals.css` (`main-page-header`, `alternative-main-page-header`, `hover-underline(-white)`, `input-error`, `form-error`, `form-success`, `scroll-y-container`). Los estilos base de `input` y `textarea` también están ahí. Los CSS modules que usan `@apply` necesitan `@reference ".../globals.css";` al principio.
+- Para páginas nuevas, usar los contenedores de `ui/pages/pages.tsx`: `MainPage` (`header` como ReactNode en `.display`, `text` opcional y `children`; contenedor `max-w-6xl`) o `LookForPage` (header con contador, `SearchFilters`, estado vacío y grid de cards). El header sticky está en el flujo, no hace falta compensar con padding superior.
+- Primitivas: `LinkButton` (navegación) y `PrimaryButton` (con `action` y `type`) en `ui/buttons/buttons.tsx`, ambos con `variant` `dark | light | white`. `Tag` en `ui/tag/tag.tsx` (specialty/área/estado). `Avatar` en `ui/avatar/avatar.tsx`: muestra la imagen y, si falta o está rota, las iniciales (`lib/initials.ts`).
+- Cards (`ui/cards/*`): componentes de servidor. Cada una enlaza a `/{_id}` y usa `card-lift` (sin sombra en reposo; en hover `translate(-3px,-3px)` + sombra dura). Las cards de professionals con estado `employed` se muestran con opacidad reducida.
+- `ProfileView` (`ui/profile/profile-view.tsx`) renderiza el perfil estilo portada para `/me` y `/[id]` (recibe `user` y un `action` opcional). No tiene botón "Contact" y no muestra el email.
+- `AuthLayout` (`ui/account/auth-layout.tsx`) es el marco de sign-in, sign-up y `/account`; `newHere.tsx` lo comparten `/account` y `/sign-up`.
+- `SearchFilters` (`ui/search/search-filters.tsx`) es un `next/form` con GET: los filtros viven en la URL y la página los lee de `searchParams` con `lib/search.ts`. Un filtro nuevo se agrega ahí, en `lib/search.ts` (con su test) y en el query de `read.ts`.
+- Estilos: Tailwind 4 configurado en CSS: los tokens están en el bloque `@theme` de `globals.css`: colores `paper #F6F3EE` (fondo), `ink #111111` (texto y bordes), `yellow #FFD84D`, `error #D7263D`, `brand #6C63FF` y `accent #50D1B2`; sombras duras `shadow-hard`, `shadow-hard-brand` y `shadow-hard-lg`. Clases reutilizables en `globals.css`: `.display` (títulos: mayúsculas, peso 900, tracking -0.05em, una palabra en `text-brand`), `.label` (11px, mayúsculas, peso 800), `.card-lift`, `input-error`, `form-error` y `form-success`. Los estilos base de `input` (excepto checkbox y radio) y `textarea` también están ahí. Bordes de 2px `border-ink`, radios de 3–6px, nada de sombras difusas ni gradientes. Los CSS modules que usan `@apply` necesitan `@reference ".../globals.css";` al principio.
+- **No usar símbolos decorativos** (↗ → ® ● ✦ y similares) en la UI. Solo se acepta un ícono mínimo con función (por ejemplo, cerrar el menú). Un título gigante (`.display`) tiene que entrar sin overflow ni cortes a mitad de palabra a 390px: calcular el ancho de la palabra más larga (~0.67em por letra) antes de elegir el tamaño.
 
 ## Estado actual / trabajo en curso
-- La búsqueda y los filtros de `LookForPage` son solo UI estática: todavía no filtran nada (último commit: "search UI first stage").
-- `/inbox` es un placeholder. `Testimonials` y el menú mobile están comentados.
+- La búsqueda y los filtros de los listados funcionan por URL (`?q=&specialty=&exp=&open=&area=`).
+- `/inbox` es un placeholder.
 - El footer enlaza a `/faqs`, `/terms-of-service`, `/privacy-policy` y `/cookies-policy`, que no existen.
 
 ## Reglas de seguridad y robustez (no romperlas)
