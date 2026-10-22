@@ -16,8 +16,7 @@ export function ProfessionalEditProfileForm({ professional }: { professional: Pr
         message: null,
     };
 
-    const professionalEditProfileFormActionWithId = professionalEditProfileFormAction.bind(null, professional._id) /* For a given function, creates a bound function that has the same body as the original function. The this object of the bound function is associated with the specified object, and has the specified initial parameters.*/
-    const [state, formAction] = useActionState(professionalEditProfileFormActionWithId, initialState);
+    const [state, formAction] = useActionState(professionalEditProfileFormAction, initialState);
 
     useEffect(() => {
         setFormMessage(state.message ? state.message : "");
@@ -203,8 +202,7 @@ export function OrganizationEditProfileForm({ organization }: { organization: Or
         message: null,
     };
 
-    const organizationEditProfileFormActionWithId = organizationEditProfileFormAction.bind(null, organization._id) /* For a given function, creates a bound function that has the same body as the original function. The this object of the bound function is associated with the specified object, and has the specified initial parameters.*/
-    const [state, formAction] = useActionState(organizationEditProfileFormActionWithId, initialState);
+    const [state, formAction] = useActionState(organizationEditProfileFormAction, initialState);
 
     useEffect(() => {
         setFormMessage(state.message ? state.message : "");

@@ -1,10 +1,8 @@
-import { headers } from "next/headers";
 import { auth, signOut } from "../../../../auth"
 import { NavLinks, SignInLink, SignOutLink, SynergiaLink } from "./nav-links"
 
 export default async function Navbar() {
     let session = await auth();
-    const headersList = headers();
 
 
     return (

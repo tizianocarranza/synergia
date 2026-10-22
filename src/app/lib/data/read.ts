@@ -1,6 +1,7 @@
 "use server"
 
 import { dbConnect } from "@/app/lib/config/db"
+import { isValidObjectId } from "mongoose"
 import Professionals from "../config/models/professionals"
 import Organizations from "../config/models/organizations"
 import { formatOrganization, formatOrganizations, formatProfessional, formatProfessionals } from "../utils"
@@ -79,7 +80,10 @@ export const getOrganizationById = async (id: String) => {
 
 
 //Profile
-export const getUserById = async (id: String | undefined) => {
+export const getUserById = async (id: string | undefined) => {
+    /* Cualquier ruta desconocida cae en /[id], asi que un id invalido no es un error */
+    if (!id || !isValidObjectId(id)) return null;
+
     try {
         await dbConnect();
 
@@ -89,7 +93,7 @@ export const getUserById = async (id: String | undefined) => {
         if(!rawUser) {
             rawUser = await Organizations.findById(id);
 
-            if(!rawUser) throw new Error("Ups! user not found.");
+            if(!rawUser) return null; /* La pagina decide que hacer (notFound) */
 
             const formattedOrganization = formatOrganization(rawUser);
             return { formattedOrganization: formattedOrganization as OrganizationWithColors, formattedProfessional: null };
