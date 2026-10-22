@@ -1,28 +1,28 @@
 import Link from "next/link"
+import clsx from "clsx"
 
-export function LinkButton({ children, href }: Readonly<{ children: React.ReactNode, href: string }>) {
+type Variant = "dark" | "light" | "white"
+
+const base = "inline-flex h-12 items-center justify-center px-5 border-2 border-ink rounded-[4px] font-extrabold uppercase text-[13px] tracking-wide transition-transform hover:-translate-x-px hover:-translate-y-px"
+
+const variants: Record<Variant, string> = {
+    dark: "bg-ink text-white shadow-hard-brand",
+    light: "bg-white text-ink shadow-hard",
+    white: "bg-white text-ink",
+}
+
+export function LinkButton({ children, href, variant = "dark" }: Readonly<{ children: React.ReactNode, href: string, variant?: Variant }>) {
     return (
-        <Link href={href} className="flex h-16 items-center justify-center bg-brand text-white rounded-lg p-5 hover:bg-accent transition-colors text-sm font-semibold">
+        <Link href={href} className={clsx(base, variants[variant])}>
             {children}
         </Link>
     )
 }
 
-export function PrimaryButton({ children, action, type = "button" }: Readonly<{ children: React.ReactNode, action?: () => void, type?: "button" | "submit" | "reset"} >) {
+export function PrimaryButton({ children, action, type = "button", variant = "dark" }: Readonly<{ children: React.ReactNode, action?: () => void, type?: "button" | "submit" | "reset", variant?: Variant }>) {
     return (
-            <button 
-            type={type}
-            onClick={action} 
-            className="flex h-16 items-center justify-center bg-brand text-white rounded-lg p-5 hover:bg-accent transition-colors text-sm font-semibold">
-                {children}
-            </button>
+        <button type={type} onClick={action} className={clsx(base, variants[variant])}>
+            {children}
+        </button>
     )
-} 
-
-
-/* 
-<div className="h-16 bg-brand rounded-lg flex p-5 items-center justify-center">
-    <p className="font-semibold text-white">I want a team!</p>
-</div>
-
-*/
+}

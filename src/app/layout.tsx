@@ -7,6 +7,7 @@ import Footer from "./ui/footer/footer";
 
 const epilogue = localFont({
   src: '../../public/fonts/epilogue/fonts/Epilogue-Variable.woff2',
+  weight: "100 900",
   display: "swap"
 })
 
@@ -23,7 +24,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`relative flex flex-col items-center h-screen w-screen overflow-x-hidden overflow-y-scroll text-lg bg-white text-black font-normal text-center ${epilogue.className}`} >
+      <body className={`relative flex flex-col items-center w-screen overflow-x-hidden text-lg bg-paper text-ink font-normal text-left ${epilogue.className}`} >
         <Navbar />
         <main className="flex flex-col items-center justify-center w-full pb-72">
           {children}
