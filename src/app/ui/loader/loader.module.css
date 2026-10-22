@@ -1,3 +1,5 @@
+@reference "../../globals.css";
+
 .container {
     @apply grid grid-cols-4 grid-rows-3 gap-4
 }
@@ -59,12 +61,12 @@
 
 @keyframes breath {
     from {
-        background-color: theme("colors.brand");
+        background-color: var(--color-brand);
         opacity: 100%;
         transform: scale(1);
     }
     50% {
-        background-color: theme("colors.accent");
+        background-color: var(--color-accent);
         opacity: 50%;
         transform: scale(1.5);
     }

@@ -54,7 +54,7 @@ export default function Footer() {
                         <li><Link href="/cookies-policy">Cookies Policy</Link></li>
                     </ul>
 
-                    <div className="hidden lg:block h-24 w-[1px] bg-white"></div>
+                    <div className="hidden lg:block h-24 w-px bg-white"></div>
 
                     <div className="flex flex-col gap-1 text-center lg:text-left">
                         <p>Developed by Tiziano Carranza.</p>

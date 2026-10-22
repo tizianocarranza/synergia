@@ -38,7 +38,7 @@ export function LookForPage({ children, header }: Readonly<{ children: React.Rea
                         <Image src={search} alt="Search icon" className="h-full" />
                     </div>
 
-                    <input className="border-none flex-grow h-full p-3" placeholder="Search by...">
+                    <input className="border-none grow h-full p-3" placeholder="Search by...">
                     </input>
 
                 </div>
