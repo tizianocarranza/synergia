@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`relative flex flex-col items-center w-screen overflow-x-hidden text-lg bg-paper text-ink font-normal text-left ${epilogue.className}`} >
         <Navbar />
-        <main className="flex flex-col items-center justify-center w-full pb-72">
+        <main className="flex flex-col items-center justify-center w-full">
           {children}
         </main>
           <Footer />
