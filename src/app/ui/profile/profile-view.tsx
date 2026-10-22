@@ -40,7 +40,7 @@ export function ProfileView({ user, action }: Readonly<{ user: ProfessionalWithC
     return (
         <article className="w-full">
             <div className="border-b-2 border-ink" style={{ background: user.color }}>
-                <div className="flex flex-col gap-6 px-5 py-8 mx-auto w-full sm:px-[8.33%] lg:items-end lg:flex-row lg:justify-between xl:px-[16.67%]">
+                <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto px-4 lg:px-10 py-8 lg:items-end lg:flex-row lg:justify-between">
                     <div className="flex flex-col gap-6 min-w-0 lg:flex-row lg:items-end lg:gap-6">
                         <Avatar key={user.image} name={user.name} image={user.image} size={120} className="rounded-[4px] shadow-hard-lg" />
                         <div className="min-w-0">
@@ -55,7 +55,7 @@ export function ProfileView({ user, action }: Readonly<{ user: ProfessionalWithC
                 </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 px-5 py-8 mx-auto w-full sm:px-[8.33%] lg:grid-cols-4 xl:px-[16.67%]">
+            <div className="grid grid-cols-2 gap-3 w-full max-w-7xl mx-auto px-4 lg:px-10 py-8 lg:grid-cols-4">
                 {professional ? (
                     <>
                         <Tile label="Experience" className="bg-white col-span-2 lg:col-span-1">

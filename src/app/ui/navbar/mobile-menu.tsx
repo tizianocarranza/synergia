@@ -2,10 +2,10 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import clsx from "clsx"
 import { LinkButton, PrimaryButton } from "../buttons/buttons"
-import { getLinks, isActive } from "./nav-links"
+import { getLinks, isActive, signInTarget } from "./nav-links"
 
 export default function MobileMenu({ signedIn, signOutAction }: Readonly<{ signedIn: boolean, signOutAction: () => Promise<void> }>) {
     const [open, setOpen] = useState(false)
@@ -30,9 +30,24 @@ export default function MobileMenu({ signedIn, signOutAction }: Readonly<{ signe
         }
     }, [open])
 
+    // Return focus to the Menu button after the dialog closes (not on first mount)
+    const menuButtonRef = useRef<HTMLButtonElement>(null)
+    const wasOpen = useRef(false)
+    useEffect(() => {
+        if (open) {
+            wasOpen.current = true
+        } else if (wasOpen.current) {
+            wasOpen.current = false
+            menuButtonRef.current?.focus()
+        }
+    }, [open])
+
+    const signIn = signInTarget(pathname)
+
     return (
         <div className="lg:hidden justify-self-end">
             <button
+                ref={menuButtonRef}
                 type="button"
                 className="label border-2 border-ink rounded-[4px] h-10 px-4"
                 aria-expanded={open}
@@ -48,6 +63,7 @@ export default function MobileMenu({ signedIn, signOutAction }: Readonly<{ signe
                         <span className="font-black text-lg tracking-tight">SYNERGIA</span>
                         <button
                             type="button"
+                            autoFocus
                             aria-label="Close menu"
                             className="label border-2 border-ink rounded-[4px] h-10 px-4 flex items-center gap-2"
                             onClick={() => setOpen(false)}
@@ -70,13 +86,16 @@ export default function MobileMenu({ signedIn, signOutAction }: Readonly<{ signe
                         ))}
                     </nav>
 
-                    <div className="mt-auto pt-10 pb-4">
+                    <div className="mt-auto pt-10 pb-4 flex flex-col items-start gap-4">
                         {signedIn ? (
-                            <form action={signOutAction}>
-                                <PrimaryButton type="submit">Sign out</PrimaryButton>
-                            </form>
-                        ) : (
-                            <LinkButton href="/sign-in">Sign in</LinkButton>
+                            <>
+                                <LinkButton href="/me" variant="light" onClick={() => setOpen(false)}>My profile</LinkButton>
+                                <form action={signOutAction}>
+                                    <PrimaryButton type="submit">Sign out</PrimaryButton>
+                                </form>
+                            </>
+                        ) : signIn && (
+                            <LinkButton href={signIn.href} onClick={() => setOpen(false)}>{signIn.name}</LinkButton>
                         )}
                     </div>
                 </div>

@@ -24,11 +24,9 @@ export default function SignInForm() {
                 <PrimaryButton type="submit">
                     <p className="">Sign in to your account</p>
                 </PrimaryButton>
-                {
-                    state.error && (
-                        <p className="form-error">{state.message}</p>
-                    )
-                }
+                <div aria-live="polite" aria-atomic="true">
+                    {state.error && <p className="form-error">{state.message}</p>}
+                </div>
             </div>
         </form>
     )

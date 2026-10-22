@@ -11,17 +11,17 @@ const variants: Record<Variant, string> = {
     white: "bg-white text-ink",
 }
 
-export function LinkButton({ children, href, variant = "dark" }: Readonly<{ children: React.ReactNode, href: string, variant?: Variant }>) {
+export function LinkButton({ children, href, variant = "dark", onClick }: Readonly<{ children: React.ReactNode, href: string, variant?: Variant, onClick?: () => void }>) {
     return (
-        <Link href={href} className={clsx(base, variants[variant])}>
+        <Link href={href} onClick={onClick} className={clsx(base, variants[variant])}>
             {children}
         </Link>
     )
 }
 
-export function PrimaryButton({ children, action, type = "button", variant = "dark" }: Readonly<{ children: React.ReactNode, action?: () => void, type?: "button" | "submit" | "reset", variant?: Variant }>) {
+export function PrimaryButton({ children, action, type = "button", variant = "dark", ref }: Readonly<{ children: React.ReactNode, action?: () => void, type?: "button" | "submit" | "reset", variant?: Variant, ref?: React.Ref<HTMLButtonElement> }>) {
     return (
-        <button type={type} onClick={action} className={clsx(base, variants[variant])}>
+        <button ref={ref} type={type} onClick={action} className={clsx(base, variants[variant])}>
             {children}
         </button>
     )

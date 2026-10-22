@@ -38,13 +38,19 @@ export function NavLinks({ signedIn }: Readonly<{ signedIn: boolean }>) {
 }
 
 // Sign in link: hidden in account routes (same behavior as before). On /sign-in it offers Sign up.
+// Shared by the desktop header and the mobile menu.
+export function signInTarget(pathname: string | null): { href: string, name: string } | null {
+    const path = pathname ?? ""
+    if (path.startsWith("/account")) return null
+    return path.startsWith("/sign-in") ? { href: "/sign-up", name: "Sign up" } : { href: "/sign-in", name: "Sign in" }
+}
+
 export function SignInLink() {
-    const pathname = usePathname() ?? ""
-    if (pathname.startsWith("/account")) return null
-    const onSignIn = pathname.startsWith("/sign-in")
+    const target = signInTarget(usePathname())
+    if (!target) return null
     return (
-        <Link href={onSignIn ? "/sign-up" : "/sign-in"} className="text-sm font-extrabold underline-offset-[6px] hover:underline decoration-2">
-            {onSignIn ? "Sign up" : "Sign in"}
+        <Link href={target.href} className="text-sm font-extrabold underline-offset-[6px] hover:underline decoration-2">
+            {target.name}
         </Link>
     )
 }

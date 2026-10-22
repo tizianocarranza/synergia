@@ -3,13 +3,39 @@
 import { specialties, areas, ProfessionalWithColors, OrganizationWithColors } from "@/app/lib/types/general";
 import { PrimaryButton } from "../buttons/buttons";
 import { ProfessionalEditProfileState, professionalEditProfileFormAction, organizationEditProfileFormAction, OrganizationEditProfileState } from "@/app/lib/data/actions";
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
+
+/* Foco del modal de edición: al abrir va al primer campo, Escape cierra (igual que Cancel)
+   y al cerrar el foco vuelve a "Edit profile" */
+function useEditDialog(open: boolean, setOpen: (open: boolean) => void) {
+    const dialogRef = useRef<HTMLDivElement>(null);
+    const triggerRef = useRef<HTMLButtonElement>(null);
+    const wasOpen = useRef(false);
+
+    useEffect(() => {
+        if (!open) {
+            if (wasOpen.current) {
+                wasOpen.current = false;
+                triggerRef.current?.focus();
+            }
+            return;
+        }
+        wasOpen.current = true;
+        dialogRef.current?.querySelector<HTMLElement>("input, textarea, select")?.focus();
+        const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+        document.addEventListener("keydown", onKey);
+        return () => document.removeEventListener("keydown", onKey);
+    }, [open, setOpen]);
+
+    return { dialogRef, triggerRef };
+}
 
 export function ProfessionalEditProfileForm({ professional }: { professional: ProfessionalWithColors }) {
     const [editMode, setEditMode] = useState(false);
     const [formMessage, setFormMessage] = useState("");
 
     const handleChangeEditMode = () => setEditMode(!editMode);
+    const { dialogRef, triggerRef } = useEditDialog(editMode, setEditMode);
 
     const initialState: ProfessionalEditProfileState = {
         errors: null,
@@ -33,12 +59,12 @@ export function ProfessionalEditProfileForm({ professional }: { professional: Pr
         <div>
             {
                 editMode && (
-                    <div className="fixed inset-0 bg-paper/95 z-[70] overflow-y-auto">
+                    <div ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="edit-profile-title" className="fixed inset-0 bg-paper/95 z-[70] overflow-y-auto">
                         <div className="flex min-h-full items-start justify-center px-5 py-10">
 
                             <form className="flex flex-col gap-6 w-full max-w-lg bg-white border-2 border-ink rounded-[6px] p-6 shadow-hard" action={formAction}>
 
-                                <h2 className="display text-3xl">Edit your profile</h2>
+                                <h2 id="edit-profile-title" className="display text-3xl">Edit your profile</h2>
 
                                 {/* Name */}
                                 <div className="flex flex-col">
@@ -179,7 +205,7 @@ export function ProfessionalEditProfileForm({ professional }: { professional: Pr
             }
             {
                 !editMode &&
-                <PrimaryButton action={handleChangeEditMode}>Edit profile</PrimaryButton>
+                <PrimaryButton ref={triggerRef} action={handleChangeEditMode}>Edit profile</PrimaryButton>
             }
         </div>
     );
@@ -191,6 +217,7 @@ export function OrganizationEditProfileForm({ organization }: { organization: Or
     const [formMessage, setFormMessage] = useState("");
 
     const handleChangeEditMode = () => setEditMode(!editMode);
+    const { dialogRef, triggerRef } = useEditDialog(editMode, setEditMode);
 
     const initialState: OrganizationEditProfileState = {
         errors: null,
@@ -215,12 +242,12 @@ export function OrganizationEditProfileForm({ organization }: { organization: Or
         <div>
             {
                 editMode && (
-                    <div className="fixed inset-0 bg-paper/95 z-[70] overflow-y-auto">
+                    <div ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="edit-profile-title" className="fixed inset-0 bg-paper/95 z-[70] overflow-y-auto">
                         <div className="flex min-h-full items-start justify-center px-5 py-10">
 
                             <form className="flex flex-col gap-6 w-full max-w-lg bg-white border-2 border-ink rounded-[6px] p-6 shadow-hard" action={formAction}>
 
-                                <h2 className="display text-3xl">Edit organization&apos;s profile</h2>
+                                <h2 id="edit-profile-title" className="display text-3xl">Edit organization&apos;s profile</h2>
 
                                 {/* Name */}
                                 <div className=" flex flex-col">
@@ -318,7 +345,7 @@ export function OrganizationEditProfileForm({ organization }: { organization: Or
                                 <div className="flex flex-col gap-5">
                                     <div className="flex gap-5">
                                         <PrimaryButton type="submit">Save</PrimaryButton>
-                                        <PrimaryButton action={handleChangeEditMode}>Cancel</PrimaryButton>
+                                        <PrimaryButton action={handleChangeEditMode} variant="light">Cancel</PrimaryButton>
                                     </div>
                                     {
                                         formMessage && <p className={`${state.errors ? "form-error" : "form-success"}`}>{formMessage}</p>
@@ -331,7 +358,7 @@ export function OrganizationEditProfileForm({ organization }: { organization: Or
             }
             {
                 !editMode &&
-                <PrimaryButton action={handleChangeEditMode}>Edit profile</PrimaryButton>
+                <PrimaryButton ref={triggerRef} action={handleChangeEditMode}>Edit profile</PrimaryButton>
             }
         </div>
     )

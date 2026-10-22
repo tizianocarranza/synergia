@@ -23,7 +23,7 @@ export default async function Navbar() {
                 <div className="hidden lg:flex items-center justify-end gap-5">
                     {signedIn ? (
                         <>
-                            <span className="text-sm font-bold">{session?.user?.name}</span>
+                            <Link href="/me" className="text-sm font-bold underline-offset-[6px] hover:underline decoration-2">{session?.user?.name}</Link>
                             <form action={signOutAction}>
                                 <PrimaryButton type="submit" variant="light">Sign out</PrimaryButton>
                             </form>

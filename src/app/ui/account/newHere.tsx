@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NewHere() {
     return (
-        <div className="px-6 py-10 lg:px-12 lg:py-16 max-w-5xl mx-auto min-h-[calc(100vh-4rem)] flex flex-col justify-center gap-8">
+        <div className="w-full px-6 py-10 lg:px-12 lg:py-16 max-w-5xl mx-auto min-h-[calc(100vh-4rem)] flex flex-col justify-center gap-8">
             <h1 className="display text-[40px] sm:text-6xl lg:text-8xl">
                 New <span className="text-brand">here?</span>
             </h1>

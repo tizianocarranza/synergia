@@ -44,7 +44,7 @@ export default function SearchFilters({ basePath, param, current, topOptions, al
             <Form action={basePath} className="flex flex-col gap-4">
                 {current[param] && <input type="hidden" name={param} value={current[param]} />}
 
-                <div className="flex w-full border-2 border-ink rounded-[4px] bg-white shadow-hard">
+                <div className="flex w-full border-2 border-ink rounded-[4px] bg-white shadow-hard focus-within:shadow-hard-brand">
                     <input
                         name="q"
                         type="search"
@@ -54,7 +54,7 @@ export default function SearchFilters({ basePath, param, current, topOptions, al
                         aria-label="Search"
                         className="grow min-w-0 h-14 border-0 rounded-none text-lg focus:shadow-none"
                     />
-                    <button type="submit" className="shrink-0 px-5 bg-ink text-white font-extrabold uppercase text-[13px] tracking-wide">
+                    <button type="submit" className="shrink-0 px-5 bg-ink text-white font-extrabold uppercase text-[13px] tracking-wide outline-none focus-visible:outline-2 focus-visible:outline-offset-[-6px] focus-visible:outline-yellow">
                         Search
                     </button>
                 </div>
@@ -97,6 +97,12 @@ export default function SearchFilters({ basePath, param, current, topOptions, al
                         <Tag active={current[param] === option}>{option}</Tag>
                     </Link>
                 ))}
+                {/* Active option outside the top list: shown so the user sees what is filtering */}
+                {current[param] && !topOptions.includes(current[param]) && (
+                    <Link href={hrefFor(current[param])} className="shrink-0">
+                        <Tag active>{current[param]}</Tag>
+                    </Link>
+                )}
                 <details key={currentKey} className="shrink-0 lg:relative">
                     <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
                         <Tag>More</Tag>

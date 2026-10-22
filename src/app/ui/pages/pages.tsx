@@ -3,7 +3,7 @@ import { LinkButton } from "@/app/ui/buttons/buttons";
 
 export function MainPage({ header, text, children }: Readonly<{ header: React.ReactNode, text?: string, children: React.ReactNode }>) {
     return (
-        <section className="flex flex-col items-start gap-10 w-full max-w-6xl mx-auto px-5 pt-10 pb-20 min-h-[60vh]">
+        <section className="flex flex-col items-start gap-10 w-full max-w-7xl mx-auto px-4 lg:px-10 pt-10 pb-20 min-h-[60vh]">
             <div className="flex flex-col items-start gap-4 w-full">
                 <h1 className="display text-5xl sm:text-7xl lg:text-8xl break-words">
                     {header}
@@ -19,7 +19,7 @@ export function MainPage({ header, text, children }: Readonly<{ header: React.Re
 
 export function LookForPage({ header, count, filters, clearHref, hasFilters, children }: Readonly<{ header: string, count: number, filters: React.ReactNode, clearHref: string, hasFilters: boolean, children: React.ReactNode }>) {
     return (
-        <section className="flex flex-col w-11/12 lg:w-5/6 xl:w-2/3 mx-auto pt-10 pb-20 min-h-screen">
+        <section className="flex flex-col w-full max-w-7xl mx-auto px-4 lg:px-10 pt-10 pb-20 min-h-screen">
             <div className="border-b-2 border-ink pb-6">
                 <h1 className="display text-4xl sm:text-5xl md:text-6xl lg:text-7xl break-words">
                     {header} <span className="text-2xl lg:text-3xl align-top">({count})</span>

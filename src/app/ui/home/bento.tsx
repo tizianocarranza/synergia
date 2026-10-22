@@ -17,13 +17,13 @@ export default function Bento({ stats }: Readonly<{ stats: HomeStats }>) {
         <span className="label">I want to hire</span>
         <div className="flex flex-col gap-2">
           <span className="display text-8xl lg:text-[9rem]">{openProfessionals}</span>
-          <span className="text-lg font-bold">developers open to work</span>
+          <span className="text-lg font-bold">{openProfessionals === 1 ? "developer" : "developers"} open to work</span>
         </div>
       </Link>
 
       <Link href="/opportunities" className={clsx(tile, lift, "bg-accent")}>
         <span className="label">I want a team</span>
-        <span className="display text-4xl">{organizations} orgs</span>
+        <span className="display text-4xl">{organizations} {organizations === 1 ? "org" : "orgs"}</span>
       </Link>
 
       {topSpecialty ? (

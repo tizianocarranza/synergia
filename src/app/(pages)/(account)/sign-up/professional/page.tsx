@@ -5,7 +5,8 @@ import { ProfessionalSignUpForm } from "@/app/ui/account/sign-up-forms";
 export default function ProfessionalSignUp() {
   return (
     <AuthLayout
-      title={<>Join as a <span className="text-accent">professional.</span></>}
+      title={<>Join as a <span className="text-yellow">professional.</span></>}
+      titleClassName="text-[40px] lg:text-5xl xl:text-6xl 2xl:text-7xl"
       aside={<>Already have an account? <Link href="/sign-in" className="underline underline-offset-4 font-extrabold">Sign in</Link></>}
     >
       <ProfessionalSignUpForm />
