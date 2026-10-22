@@ -1,11 +1,14 @@
-import { OrganizationSignUpForm } from "@/app/ui/account/sign-up-forms"; //Dependiendo de las props que se reciban del layout (en base al boton que toque el usuario) se reenderiza un form u otro
-import { LinkButton } from "@/app/ui/buttons/buttons";
-import { MainPage } from "@/app/ui/pages/pages";
-export default function OrganizationSignUp() {
+import Link from "next/link";
+import AuthLayout from "@/app/ui/account/auth-layout";
+import { OrganizationSignUpForm } from "@/app/ui/account/sign-up-forms";
 
+export default function OrganizationSignUp() {
   return (
-    <MainPage header="Welcome recruiter!">
-        <OrganizationSignUpForm />
-    </MainPage>
+    <AuthLayout
+      title={<>Join as an <span className="text-accent">organization.</span></>}
+      aside={<>Already have an account? <Link href="/sign-in" className="underline underline-offset-4 font-extrabold">Sign in</Link></>}
+    >
+      <OrganizationSignUpForm />
+    </AuthLayout>
   );
 }

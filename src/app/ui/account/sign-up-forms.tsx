@@ -14,13 +14,12 @@ export function ProfessionalSignUpForm() {
     const [state, formAction] = useActionState(professionalSignUpFormAction, initialState);
 
     return (
-        <form action={formAction} className="flex flex-col gap-14 w-80 items-center">
-            <h1 className="text-xl font-semibold text-accent p-2 rounded-lg bg-brand">Create your professional&apos;s account.</h1>
-            <div className="flex flex-col gap-8">
+        <form action={formAction} className="flex flex-col gap-10 w-full">
+            <div className="flex flex-col gap-6">
 
                 {/* Name */}
                 <div className="flex flex-col">
-                    <label htmlFor="name">What&apos;s your first name?</label>
+                    <label htmlFor="name" className="label mb-2">What&apos;s your first name?</label>
                     <input
                         type="text"
                         name="name"
@@ -39,7 +38,7 @@ export function ProfessionalSignUpForm() {
 
                 {/* Specialty */}
                 <div className="flex flex-col">
-                    <label htmlFor="specialty">What are you good at?</label>
+                    <label htmlFor="specialty" className="label mb-2">What are you good at?</label>
                     <input
                         list="specialties"
                         name="specialty"
@@ -62,7 +61,7 @@ export function ProfessionalSignUpForm() {
                 
                 {/* Experience */}
                 <div className="flex flex-col">
-                    <label htmlFor="experience">How many years of experience do you have?</label>
+                    <label htmlFor="experience" className="label mb-2">How many years of experience do you have?</label>
                     <input
                         type="number"
                         name="experience"
@@ -83,7 +82,7 @@ export function ProfessionalSignUpForm() {
 
                 {/* Employment Status */}
                 <div className="flex flex-col">
-                    <label htmlFor="employmentStatus">What&apos;s your current employment status?</label>
+                    <label htmlFor="employmentStatus" className="label mb-2">What&apos;s your current employment status?</label>
                     <div className="flex flex-col gap-2">
                         <div className="flex items-center gap-3">
                             <input
@@ -93,7 +92,7 @@ export function ProfessionalSignUpForm() {
                                 value="employed"
                                 aria-describedby="employmentStatus-error"
                             />
-                            <label htmlFor="employed">Employed</label>
+                            <label htmlFor="employed" className="font-semibold">Employed</label>
                         </div>
                         <div className="flex items-center gap-3">
                             <input
@@ -102,7 +101,7 @@ export function ProfessionalSignUpForm() {
                                 id="unemployed"
                                 value="unemployed"
                             />
-                            <label htmlFor="unemployed">Unemployed</label>
+                            <label htmlFor="unemployed" className="font-semibold">Unemployed</label>
                         </div>
                     </div>
                     <div id="employmentStatus-error" aria-live="polite" aria-atomic="true">
@@ -117,7 +116,7 @@ export function ProfessionalSignUpForm() {
 
                 {/* Description */}
                 <div className="flex flex-col">
-                    <label htmlFor="description">Give us a brief description of yourself as a professional</label>
+                    <label htmlFor="description" className="label mb-2">Give us a brief description of yourself as a professional</label>
                     <textarea
                         name="description"
                         id="description"
@@ -137,7 +136,7 @@ export function ProfessionalSignUpForm() {
 
                 {/* Email */}
                 <div className="flex flex-col">
-                    <label htmlFor="email">Write your email</label>
+                    <label htmlFor="email" className="label mb-2">Write your email</label>
                     <input
                         type="email"
                         name="email"
@@ -156,7 +155,7 @@ export function ProfessionalSignUpForm() {
                 
                 {/* Password */}
                 <div className="flex flex-col">
-                    <label htmlFor="password">Create a password</label>
+                    <label htmlFor="password" className="label mb-2">Create a password</label>
                     <input
                         type="password"
                         name="password"
@@ -174,7 +173,7 @@ export function ProfessionalSignUpForm() {
             </div>
 
         
-            <div className="flex flex-col gap-2 items-center">
+            <div className="flex flex-col gap-2 items-start">
                 <PrimaryButton type="submit">
                     <p className="">Create account</p>
                 </PrimaryButton>
@@ -197,13 +196,12 @@ export function OrganizationSignUpForm() {
     const [state, formAction] = useActionState(organizationSignUpFormAction, initialState);
 
     return (
-        <form action={formAction} className="flex flex-col gap-14 w-80 items-center">
-            <h1 className="text-xl font-semibold text-accent p-2 rounded-lg bg-brand">Create your organization&apos;s account.</h1>
-            <div className="flex flex-col gap-8">
+        <form action={formAction} className="flex flex-col gap-10 w-full">
+            <div className="flex flex-col gap-6">
 
                 {/* Name */}
                 <div className=" flex flex-col">
-                    <label htmlFor="name">What&apos;s the organization&apos;s name?</label>
+                    <label htmlFor="name" className="label mb-2">What&apos;s the organization&apos;s name?</label>
                     <input 
                     type="text" 
                     name="name"
@@ -224,7 +222,7 @@ export function OrganizationSignUpForm() {
 
                 {/* Area */}
                 <div className="flex flex-col">
-                    <label htmlFor="area">What&apos;s the organization&apos;s operative area?</label>
+                    <label htmlFor="area" className="label mb-2">What&apos;s the organization&apos;s operative area?</label>
                     <input 
                     list="areas" 
                     name="area" 
@@ -250,7 +248,7 @@ export function OrganizationSignUpForm() {
 
                 {/* Name */}
                 <div className=" flex flex-col">
-                    <label htmlFor="website">Does the organization have a website?</label>
+                    <label htmlFor="website" className="label mb-2">Does the organization have a website?</label>
                     <input 
                     type="url" 
                     name="website"
@@ -271,7 +269,7 @@ export function OrganizationSignUpForm() {
 
                 {/* Description */}
                 <div className="flex flex-col ">
-                    <label htmlFor="description">Give us a brief description of the organization</label>
+                    <label htmlFor="description" className="label mb-2">Give us a brief description of the organization</label>
                     <textarea 
                     name="description" 
                     id="description"
@@ -292,7 +290,7 @@ export function OrganizationSignUpForm() {
 
                 {/* Email */}
                 <div className="flex flex-col ">
-                    <label htmlFor="email">Assign an email to the organization&apos;s profile</label>
+                    <label htmlFor="email" className="label mb-2">Assign an email to the organization&apos;s profile</label>
                     <input 
                     type="email"
                     id="email"
@@ -313,7 +311,7 @@ export function OrganizationSignUpForm() {
 
                 {/* Password */}
                 <div className="flex flex-col ">
-                    <label htmlFor="password">Assign password to the organization&apos;s profile</label>
+                    <label htmlFor="password" className="label mb-2">Assign password to the organization&apos;s profile</label>
                     <input 
                     type="password" 
                     name="password" 
@@ -333,7 +331,7 @@ export function OrganizationSignUpForm() {
             </div>
 
 
-            <div className="flex flex-col gap-2 items-center">
+            <div className="flex flex-col gap-2 items-start">
                 <PrimaryButton type="submit">
                     <p className="">Create account</p>
                 </PrimaryButton>
