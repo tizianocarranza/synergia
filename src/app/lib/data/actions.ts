@@ -6,11 +6,23 @@ import Organizations from "../config/models/organizations";
 import { z } from "zod"
 import { areas, specialties } from "../types/general";
 import bcrypt from "bcrypt";
-import { signIn } from "@/../auth";
+import { auth, signIn } from "@/../auth";
 import { AuthError } from "next-auth";
 import { revalidatePath } from "next/cache";
 
 const saltRounds = 10;
+
+/* Professionals y Organizations son colecciones separadas, el unique del schema no evita duplicados entre ambas */
+const isEmailTaken = async (email: string) => {
+    const [professional, organization] = await Promise.all([
+        Professionals.exists({ email }),
+        Organizations.exists({ email }),
+    ]);
+    return !!(professional || organization);
+}
+
+const emailTakenMessage = "This email is already registered.";
+const unauthorizedMessage = "You must be signed in to edit your profile.";
 
 
 /* Form Schemas */
@@ -150,6 +162,14 @@ export type SignInState = {
         try {
             await dbConnect();
 
+            if (await isEmailTaken(professional.email)) {
+                return {
+                    ...prevState,
+                    errors: { email: [emailTakenMessage] },
+                    message: emailTakenMessage
+                } as ProfessionalState;
+            }
+
             await Professionals.create({ ...professional });
 
             return {
@@ -176,7 +196,17 @@ export type SignInState = {
         }
     }
 
-    export const professionalEditProfileFormAction = async (id: String, prevstate: ProfessionalEditProfileState, formData: FormData) => {
+    export const professionalEditProfileFormAction = async (prevstate: ProfessionalEditProfileState, formData: FormData) => {
+        /* El id sale de la sesion, nunca del cliente, para que solo se pueda editar el perfil propio */
+        const session = await auth();
+        if (!session?.user?.id || session.user.type !== "professional") {
+            return {
+                errors: { server: [unauthorizedMessage] },
+                message: unauthorizedMessage
+            } as ProfessionalEditProfileState;
+        }
+        const id = session.user.id;
+
         const rawProfessionalProfileFormData = Object.fromEntries(formData.entries());
         const validatedProfessionalProfileFormData = professionalProfileFormSchema.safeParse(rawProfessionalProfileFormData);
 
@@ -232,6 +262,15 @@ export type SignInState = {
 
         try {
             await dbConnect();
+
+            if (await isEmailTaken(organization.email)) {
+                return {
+                    ...prevState,
+                    errors: { email: [emailTakenMessage] },
+                    message: emailTakenMessage
+                } as OrganizationState;
+            }
+
             await Organizations.create({ ...organization });
 
             return {
@@ -261,7 +300,17 @@ export type SignInState = {
         }
     }
 
-    export const organizationEditProfileFormAction = async (id: String, prevstate: OrganizationEditProfileState, formData: FormData) => {
+    export const organizationEditProfileFormAction = async (prevstate: OrganizationEditProfileState, formData: FormData) => {
+        /* El id sale de la sesion, nunca del cliente, para que solo se pueda editar el perfil propio */
+        const session = await auth();
+        if (!session?.user?.id || session.user.type !== "organization") {
+            return {
+                errors: { server: [unauthorizedMessage] },
+                message: unauthorizedMessage
+            } as OrganizationEditProfileState;
+        }
+        const id = session.user.id;
+
         const rawOrganizationProfileFormData = Object.fromEntries(formData.entries());
         const validatedOrganizationProfileFormData = organizationProfileFormSchema.safeParse(rawOrganizationProfileFormData);
 

@@ -1,14 +1,15 @@
 import React from 'react'
-import { getProfessionalById, getOrganizationById, getUserById } from '@/app/lib/data/read';
+import { notFound } from 'next/navigation';
+import { getUserById } from '@/app/lib/data/read';
 import ProfessionalCard from '@/app/ui/cards/professional-card';
 import OrganizationCard from '@/app/ui/cards/organization-card';
 import { MainPage } from '@/app/ui/pages/pages';
 
-async function Page({ params }: { params: { id: String }}) {
+async function Page({ params }: { params: { id: string }}) {
 
     const user = await getUserById(params.id);
-    
-    
+
+    if (!user) notFound();
 
   return (
     <MainPage header={user.formattedProfessional ? user.formattedProfessional.name : user.formattedOrganization.name}>

@@ -49,7 +49,6 @@ export const specialties = [
     "Laravel",
     "Go",
     "Rust",
-    "GraphQL",
     "Apollo",
     "Elasticsearch",
     "Redis",
@@ -161,7 +160,8 @@ export type Professional = User & {
     specialty: Specialty,
     employmentStatus: "employed" | "unemployed"
 };
-export type ProfessionalWithColors = Professional & {
+/* Version publica (sin password) que se envia a los componentes */
+export type ProfessionalWithColors = Omit<Professional, "password"> & {
     color: string,
     cardColor: string
 }
@@ -170,7 +170,7 @@ export type Organization = User & {
     area: Area,
     website?: string
 }
-export type OrganizationWithColors = Organization & {
+export type OrganizationWithColors = Omit<Organization, "password"> & {
     color: string,
     cardColor: string 
 }
