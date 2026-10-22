@@ -38,7 +38,7 @@ export default function Footer() {
                 </div>
             </div>
 
-            <div className="display text-[18vw] lg:text-[11rem] mt-16 break-words">SYNERGIA</div>
+            <div className="display text-[15vw] lg:text-[length:min(11rem,14vw)] mt-16 whitespace-nowrap">SYNERGIA</div>
 
             <div className="flex flex-col sm:flex-row sm:justify-between gap-1 py-5 text-xs font-semibold border-t-2 border-white/30">
                 <p>© {new Date().getFullYear()} Synergia</p>
