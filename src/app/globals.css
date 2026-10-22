@@ -107,7 +107,7 @@
     @apply text-md;
   };
 
-  input {
+  input:not([type=checkbox]):not([type=radio]) {
     @apply h-11 px-3 bg-white border-2 border-ink rounded-[4px] focus:shadow-hard-brand focus:outline-none;
   };
 

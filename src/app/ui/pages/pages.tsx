@@ -1,7 +1,5 @@
 import React from "react";
-import search from "../../../../public/search.svg"
-import filter from "../../../../public/filter.svg"
-import Image from "next/image";
+import { LinkButton } from "@/app/ui/buttons/buttons";
 
 export function MainPage({ children, header, text }: Readonly<{ children: React.ReactNode, header?: string, text?: string }>) {
     return (
@@ -23,44 +21,25 @@ export function MainPage({ children, header, text }: Readonly<{ children: React.
     )
 }
 
-export function LookForPage({ children, header }: Readonly<{ children: React.ReactNode, header: string }>) {
+export function LookForPage({ header, count, filters, clearHref, children }: Readonly<{ header: string, count: number, filters: React.ReactNode, clearHref: string, children: React.ReactNode }>) {
     return (
-        <section className="flex flex-col gap-28 items-center pt-36 w-11/12 lg:w-5/6 xl:w-2/3 min-h-screen">
-            <h1 className="alternative-main-page-header">{header}</h1>
-
-
-            <form className="w-full flex flex-col gap-5 justify-center items-start">
-
-
-                <div className="w-full h-12 flex rounded-md border border-gray-200 ">
-
-                    <div className="h-full flex items-center justify-center p-3">
-                        <Image src={search} alt="Search icon" className="h-full" />
-                    </div>
-
-                    <input className="border-none grow h-full p-3" placeholder="Search by...">
-                    </input>
-
-                </div>
-
-                <button type="button" className="h-8 flex items-center justify-center p-3 border-gray-200 border rounded-full text-gray-400 text-xs">
-                    Filter by
-                    {/* <Image src={filter} alt="Filter icon" className="h-full" /> */}
-                </button>
-
-                <div className="w-80 h-44 overflow-y-auto scroll-container rounded-md border border-gray-200 flex flex-col items-start p-3">
-                    <li className="border-b pt-3 border-gray-100 w-full text-left">Experience</li>
-                    <li className="border-b pt-3 border-gray-100 w-full text-left">Specialty</li>
-                    <li className="border-b pt-3 border-gray-100 w-full text-left">Availability</li>
-                    <li className="border-b pt-3 border-gray-100 w-full text-left">Salary</li>
-                    <li className="border-b pt-3 border-gray-100 w-full text-left"></li>
-                </div>
-            </form>
-
-
-            <div className="flex-1 w-full items-center justify-center justify-items-center lg:gap-14" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(384px, 1fr))", gridAutoRows: "384px" }}>
-                {children}
+        <section className="flex flex-col w-11/12 lg:w-5/6 xl:w-2/3 mx-auto pt-10 pb-20 min-h-screen">
+            <div className="border-b-2 border-ink pb-6">
+                <h1 className="display text-6xl lg:text-8xl break-words">
+                    {header} <span className="text-2xl lg:text-3xl align-top">({count})</span>
+                </h1>
             </div>
+            {filters}
+            {count === 0 ? (
+                <div className="flex flex-col items-start gap-5 border-2 border-ink rounded-[6px] bg-white p-8">
+                    <p className="font-semibold text-lg">No matches for these filters.</p>
+                    <LinkButton href={clearHref} variant="light">Clear filters</LinkButton>
+                </div>
+            ) : (
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 justify-items-stretch">
+                    {children}
+                </div>
+            )}
         </section>
     )
 }
