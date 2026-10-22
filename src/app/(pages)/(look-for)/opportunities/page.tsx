@@ -17,6 +17,7 @@ export default async function Opportunities({ searchParams }: { searchParams: Pr
             header="Opportunities"
             count={organizations.length}
             clearHref="/opportunities"
+            hasFilters={Boolean(filters.q || filters.area)}
             filters={
                 <SearchFilters
                     basePath="/opportunities"

@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import Form from "next/form"
 import Link from "next/link"
 import { Tag } from "@/app/ui/tag/tag"
@@ -24,18 +25,31 @@ const expLabels: Record<keyof typeof experienceRanges, string> = {
 export default function SearchFilters({ basePath, param, current, topOptions, allOptions, professionalControls }: Readonly<Props>) {
     const hrefFor = (value?: string) => buildSearchHref(basePath, { ...current, [param]: value })
     const submitOnChange = (e: React.ChangeEvent<HTMLElement>) => e.currentTarget.closest("form")?.requestSubmit()
-    const formKey = JSON.stringify(current)
+    const currentKey = JSON.stringify(current)
+
+    // Controlled copies re-synced when the URL changes, so the form is never remounted and focus is kept.
+    const [syncedKey, setSyncedKey] = useState(currentKey)
+    const [q, setQ] = useState(current.q ?? "")
+    const [exp, setExp] = useState(current.exp ?? "")
+    const [open, setOpen] = useState(current.open === "1")
+    if (syncedKey !== currentKey) {
+        setSyncedKey(currentKey)
+        setQ(current.q ?? "")
+        setExp(current.exp ?? "")
+        setOpen(current.open === "1")
+    }
 
     return (
         <div className="flex flex-col gap-4 py-6">
-            <Form action={basePath} key={formKey} className="flex flex-col gap-4">
+            <Form action={basePath} className="flex flex-col gap-4">
                 {current[param] && <input type="hidden" name={param} value={current[param]} />}
 
                 <div className="flex w-full border-2 border-ink rounded-[4px] bg-white shadow-hard">
                     <input
                         name="q"
                         type="search"
-                        defaultValue={current.q ?? ""}
+                        value={q}
+                        onChange={(e) => setQ(e.target.value)}
                         placeholder={professionalControls ? "Search by name or description" : "Search organizations"}
                         aria-label="Search"
                         className="grow min-w-0 h-14 border-0 rounded-none text-lg focus:shadow-none"
@@ -51,8 +65,8 @@ export default function SearchFilters({ basePath, param, current, topOptions, al
                             Experience
                             <select
                                 name="exp"
-                                defaultValue={current.exp ?? ""}
-                                onChange={submitOnChange}
+                                value={exp}
+                                onChange={(e) => { setExp(e.target.value); submitOnChange(e) }}
                                 className="h-11 px-2 bg-white border-2 border-ink rounded-[4px] normal-case font-semibold text-sm focus:outline-none focus:shadow-hard-brand"
                             >
                                 <option value="">Any</option>
@@ -66,8 +80,8 @@ export default function SearchFilters({ basePath, param, current, topOptions, al
                                 type="checkbox"
                                 name="open"
                                 value="1"
-                                defaultChecked={current.open === "1"}
-                                onChange={submitOnChange}
+                                checked={open}
+                                onChange={(e) => { setOpen(e.target.checked); submitOnChange(e) }}
                                 className="size-5 shrink-0 cursor-pointer appearance-none border-2 border-ink rounded-[3px] bg-white checked:bg-accent checked:shadow-[inset_0_0_0_3px_white] focus-visible:shadow-hard-brand outline-none"
                             />
                             Open to work only
@@ -83,7 +97,7 @@ export default function SearchFilters({ basePath, param, current, topOptions, al
                         <Tag active={current[param] === option}>{option}</Tag>
                     </Link>
                 ))}
-                <details className="shrink-0 lg:relative">
+                <details key={currentKey} className="shrink-0 lg:relative">
                     <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
                         <Tag>More</Tag>
                     </summary>

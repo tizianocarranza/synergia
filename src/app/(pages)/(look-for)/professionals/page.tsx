@@ -17,6 +17,7 @@ export default async function Professionals({ searchParams }: { searchParams: Pr
             header="Professionals"
             count={professionals.length}
             clearHref="/professionals"
+            hasFilters={Boolean(filters.q || filters.specialty || filters.exp || filters.open)}
             filters={
                 <SearchFilters
                     basePath="/professionals"
