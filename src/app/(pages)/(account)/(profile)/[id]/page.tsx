@@ -5,9 +5,10 @@ import ProfessionalCard from '@/app/ui/cards/professional-card';
 import OrganizationCard from '@/app/ui/cards/organization-card';
 import { MainPage } from '@/app/ui/pages/pages';
 
-async function Page({ params }: { params: { id: string }}) {
+async function Page({ params }: { params: Promise<{ id: string }> }) {
 
-    const user = await getUserById(params.id);
+    const { id } = await params;
+    const user = await getUserById(id);
 
     if (!user) notFound();
 

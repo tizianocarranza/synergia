@@ -29,10 +29,10 @@ export default function Footer() {
                     <div className="flex flex-col gap-10 items-center lg:items-start">
                         <h1 className="font-bold text-2xl">Social</h1>
                         <ul className="flex flex-col gap-3 items-center lg:items-start">
-                            <li className="flex"><a href="/" className="hover-underline-white">Facebook</a></li>
-                            <li className="flex"><a href="/" className="hover-underline-white">Twitter</a></li>
-                            <li className="flex"><a href="/" className="hover-underline-white">LinkedIn</a></li>
-                            <li className="flex"><a href="/" className="hover-underline-white">Instagram</a></li>
+                            <li className="flex"><Link href="/" className="hover-underline-white">Facebook</Link></li>
+                            <li className="flex"><Link href="/" className="hover-underline-white">Twitter</Link></li>
+                            <li className="flex"><Link href="/" className="hover-underline-white">LinkedIn</Link></li>
+                            <li className="flex"><Link href="/" className="hover-underline-white">Instagram</Link></li>
                         </ul>
                     </div>
 
@@ -49,9 +49,9 @@ export default function Footer() {
                 <div className="flex flex-col items-center justify-center gap-20 lg:flex-row lg:gap-10 lg:items-end lg:justify-end text-xs text-left w-full">
 
                     <ul className="flex flex-col gap-5 font-semibold text-center lg:text-right">
-                        <li><a href="/terms-of-service">Terms of Service</a></li>
-                        <li><a href="/privacy-policy">Privacy Policy</a></li>
-                        <li><a href="/cookies-policy">Cookies Policy</a></li>
+                        <li><Link href="/terms-of-service">Terms of Service</Link></li>
+                        <li><Link href="/privacy-policy">Privacy Policy</Link></li>
+                        <li><Link href="/cookies-policy">Cookies Policy</Link></li>
                     </ul>
 
                     <div className="hidden lg:block h-24 w-[1px] bg-white"></div>

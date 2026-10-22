@@ -3,7 +3,7 @@
 import { specialties, areas, ProfessionalWithColors, OrganizationWithColors } from "@/app/lib/types/general";
 import { PrimaryButton } from "../buttons/buttons";
 import { ProfessionalEditProfileState, professionalEditProfileFormAction, organizationEditProfileFormAction, OrganizationEditProfileState } from "@/app/lib/data/actions";
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useState } from "react";
 
 export function ProfessionalEditProfileForm({ professional }: { professional: ProfessionalWithColors }) {
     const [editMode, setEditMode] = useState(false);
@@ -16,18 +16,18 @@ export function ProfessionalEditProfileForm({ professional }: { professional: Pr
         message: null,
     };
 
-    const [state, formAction] = useActionState(professionalEditProfileFormAction, initialState);
+    /* El mensaje y el cierre del modal se manejan al terminar el action (no en un useEffect) */
+    const [state, formAction] = useActionState(async (prevState: ProfessionalEditProfileState, formData: FormData) => {
+        const result = await professionalEditProfileFormAction(prevState, formData);
+        setFormMessage(result.message ? result.message : "");
 
-    useEffect(() => {
-        setFormMessage(state.message ? state.message : "");
-
-        if (!state.errors) setTimeout(() => {
-            /* handleChangeEditMode(); Si uso esto, al reenderizarse por primera vez, se abrira asi que hago directamente setEditMode(false);*/
+        if (!result.errors) setTimeout(() => {
             setEditMode(false);
             setFormMessage("");
         }, 3000);
 
-    }, [state])
+        return result;
+    }, initialState);
 
     return (
         <div className="flex flex-col justify-center gap-14 w-full">
@@ -202,20 +202,18 @@ export function OrganizationEditProfileForm({ organization }: { organization: Or
         message: null,
     };
 
-    const [state, formAction] = useActionState(organizationEditProfileFormAction, initialState);
+    /* El mensaje y el cierre del modal se manejan al terminar el action (no en un useEffect) */
+    const [state, formAction] = useActionState(async (prevState: OrganizationEditProfileState, formData: FormData) => {
+        const result = await organizationEditProfileFormAction(prevState, formData);
+        setFormMessage(result.message ? result.message : "");
 
-    useEffect(() => {
-        setFormMessage(state.message ? state.message : "");
-
-        if (!state.errors) setTimeout(() => {
-
-            /* handleChangeEditMode(); Si uso esto, al reenderizarse por primera vez, se abrira asi que hago directamente setEditMode(false);*/
+        if (!result.errors) setTimeout(() => {
             setEditMode(false);
-            setFormMessage("")
-
+            setFormMessage("");
         }, 3000);
 
-    }, [state])
+        return result;
+    }, initialState);
 
 
     return (
