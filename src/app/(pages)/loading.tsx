@@ -3,7 +3,7 @@ import Loader from '../ui/loader/loader';
 
 function Loading() {
   return (
-    <div className="h-screen w-screen flex flex-col items-center justify-center">
+    <div className="w-full min-h-[60vh] flex items-center justify-center">
         <Loader />
     </div>
   )

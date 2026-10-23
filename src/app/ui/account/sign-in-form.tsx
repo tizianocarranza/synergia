@@ -9,26 +9,24 @@ export default function SignInForm() {
     const [state /* este es el state */, formAction, isPending] = useActionState(autheticationFormAction, initialState)
 
     return (
-        <form action={formAction} className="flex flex-col gap-14 w-80 items-center">
+        <form action={formAction} className="flex flex-col gap-10 w-full">
             <div className="flex flex-col gap-8 w-full">
                 <div className="flex flex-col">
-                    <label htmlFor="email">Write your email</label>
+                    <label htmlFor="email" className="label mb-2">Write your email</label>
                     <input type="email" name="email" id="email" required/>
                 </div>
                 <div className="flex flex-col">
-                    <label htmlFor="password">Write your password</label>
+                    <label htmlFor="password" className="label mb-2">Write your password</label>
                     <input type="password" name="password" id="password" required/>
                 </div>
             </div>
-            <div className="div" aria-disabled={isPending}>
+            <div aria-disabled={isPending}>
                 <PrimaryButton type="submit">
                     <p className="">Sign in to your account</p>
                 </PrimaryButton>
-                {
-                    state.error && (
-                        <p className="form-error">{state.message}</p>
-                    )
-                }
+                <div aria-live="polite" aria-atomic="true">
+                    {state.error && <p className="form-error">{state.message}</p>}
+                </div>
             </div>
         </form>
     )

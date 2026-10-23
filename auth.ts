@@ -7,7 +7,7 @@ import { z } from "zod";
 
 /* However, you will need to create a separate file for the bcrypt package. This is because bcrypt relies on Node.js APIs not available in Next.js Middleware. */
 const signInSchema = z.object({
-    email: z.string().email("Please enter a valid email address."),
+    email: z.email("Please enter a valid email address."),
     password: z.string().min(8, "Password should have at least 8 characters."),
 });
 

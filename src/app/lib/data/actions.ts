@@ -28,7 +28,7 @@ const unauthorizedMessage = "You must be signed in to edit your profile.";
 /* Form Schemas */
 const userFormSchema = z.object({
     name: z.string().min(2, "Please enter a valid name."),
-    email: z.string().email("Please enter a valid email address."),
+    email: z.email("Please enter a valid email address."),
     password: z.string().min(8, "Password should have at least 8 characters."),
     description: z.string().min(50, "Tell us a bit more! Description should be at least 50 characters long."),
     image: z.string().optional()
@@ -38,17 +38,19 @@ const userFormSchema = z.object({
 /* Professionals */
 const professionalFormSchema = userFormSchema.extend({
     experience: z.coerce.number().gt(0, { /* Coerce pasa a number el string que recibe del form */
-        message: "Please enter a valid number of years of experience (at least 1 year).",
+        error: "Please enter a valid number of years of experience (at least 1 year).",
     }).lt(21, {
-        message: "Please enter a valid number of years of experience (maximum 20 years)."
+        error: "Please enter a valid number of years of experience (maximum 20 years)."
     }),
     specialty: z.enum(specialties, {
-        message: "Please select your area of specialty.",
-        invalid_type_error: "Oops! That doesn't seem like a valid specialty. Please select one from the list."
+        error: (issue) => issue.input /* valor no vacío pero fuera de la lista */
+            ? "Oops! That doesn't seem like a valid specialty. Please select one from the list."
+            : "Please select your area of specialty."
     }),
     employmentStatus: z.enum(["employed", "unemployed"], {
-        message: "Please select your current employment status.",
-        invalid_type_error: "Please select your current employment status from the available options."
+        error: (issue) => issue.input /* valor no vacío pero fuera de la lista */
+            ? "Please select your current employment status from the available options."
+            : "Please select your current employment status."
     })
 });
 
@@ -58,10 +60,11 @@ const professionalProfileFormSchema = professionalFormSchema.omit({ email: true,
 
 const organizationFormSchema = userFormSchema.extend({
     area: z.enum(areas, {
-        message: "Please select the organization's operative area.",
-        invalid_type_error: "Oops! That doesn't seem like a valid organization's operative area. Please select one from the list."
+        error: (issue) => issue.input /* valor no vacío pero fuera de la lista */
+            ? "Oops! That doesn't seem like a valid organization's operative area. Please select one from the list."
+            : "Please select the organization's operative area."
     }),
-    website: z.string().url("Please enter a valid URL (this field is optional).").optional().or(z.literal("")) //Para manejar cuando se envia vacio porque URL espera un string valido
+    website: z.url("Please enter a valid URL (this field is optional).").optional().or(z.literal("")) //Para manejar cuando se envia vacio porque URL espera un string valido
 })
 
 const organizationProfileFormSchema = organizationFormSchema.omit({ email: true, password: true });
@@ -150,7 +153,7 @@ export type SignInState = {
         if (!validatedProfessionalFormData.success) {
             return {
                 ...prevState,
-                errors: validatedProfessionalFormData.error.flatten().fieldErrors,
+                errors: z.flattenError(validatedProfessionalFormData.error).fieldErrors,
                 message: "Missing Fields, please submit the required information to create a professional's account."
             } as ProfessionalState;
         }
@@ -212,7 +215,7 @@ export type SignInState = {
 
         if (!validatedProfessionalProfileFormData.success) {
             return {
-                errors: validatedProfessionalProfileFormData.error.flatten().fieldErrors,
+                errors: z.flattenError(validatedProfessionalProfileFormData.error).fieldErrors,
                 message: "Please don't leave empty fields"
             } as ProfessionalEditProfileState;
         }
@@ -252,7 +255,7 @@ export type SignInState = {
         if (!validatedOrganizationFormData.success) {
             return {
                 ...prevState,
-                errors: validatedOrganizationFormData.error.flatten().fieldErrors,
+                errors: z.flattenError(validatedOrganizationFormData.error).fieldErrors,
                 message: "Missing Fields, please submit the required information to create an organization's account."
             } as OrganizationState;
         }
@@ -316,7 +319,7 @@ export type SignInState = {
 
         if (!validatedOrganizationProfileFormData.success) {
             return {
-                errors: validatedOrganizationProfileFormData.error.flatten().fieldErrors,
+                errors: z.flattenError(validatedOrganizationProfileFormData.error).fieldErrors,
                 message: "Please don't leave empty fields"
             } as OrganizationEditProfileState;
         }

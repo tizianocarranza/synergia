@@ -1,0 +1,179 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  .sx { --ink:#111; --paper:#F6F3EE; --brand:#6C63FF; --accent:#50D1B2; --yellow:#FFD84D;
+        font-family:'Epilogue',sans-serif; background:var(--paper); color:var(--ink); border-radius:12px; overflow:hidden; text-align:left }
+  .sx * { box-sizing:border-box }
+  .sx .wrap { padding:22px 30px 30px }
+  .sx nav { display:flex; justify-content:space-between; align-items:center; font-size:13px; font-weight:800; border-bottom:2px solid var(--ink); padding:14px 30px }
+  .sx nav .links { display:flex; gap:22px; font-weight:500 }
+  .sx nav .links .on { font-weight:800; text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:4px }
+  .sx .btn { display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:800; text-transform:uppercase; padding:10px 14px; border:2px solid var(--ink); border-radius:4px; background:var(--ink); color:#fff; box-shadow:4px 4px 0 var(--brand) }
+  .sx .btn.light { background:#fff; color:var(--ink); box-shadow:4px 4px 0 var(--ink) }
+  .sx .h-giant { font-size:96px; line-height:.86; font-weight:900; letter-spacing:-.055em; text-transform:uppercase; margin:0 }
+  .sx .h-big { font-size:58px; line-height:.9; font-weight:900; letter-spacing:-.05em; text-transform:uppercase; margin:0 }
+  .sx em { font-style:normal; color:var(--brand) }
+  .sx .label { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.06em }
+  .sx .tag { display:inline-block; font-size:10px; font-weight:800; text-transform:uppercase; border:2px solid var(--ink); padding:3px 7px; border-radius:3px; background:#fff }
+  .sx .tile { border:2px solid var(--ink); border-radius:6px; padding:16px; background:#fff }
+  .sx .av { border:2px solid var(--ink); border-radius:4px; flex-shrink:0 }
+  .sx .marquee { border-top:2px solid var(--ink); border-bottom:2px solid var(--ink); background:var(--ink); color:var(--paper); white-space:nowrap; overflow:hidden; font-weight:900; font-size:22px; text-transform:uppercase; padding:10px 0; letter-spacing:-.02em }
+  .sx .marquee span { margin:0 18px }
+  .sx .marquee b { color:var(--accent) }
+
+  /* cards de professional */
+  .pcard { border:2px solid #111; border-radius:6px; background:#fff; overflow:hidden; transition:transform .15s }
+  .pcard:hover { transform:translate(-3px,-3px); box-shadow:6px 6px 0 #111 }
+  .pcard .top { height:74px; position:relative; border-bottom:2px solid #111 }
+  .pcard .top .av { position:absolute; left:14px; bottom:-22px; width:48px; height:48px }
+  .pcard .body { padding:30px 14px 14px }
+  .pcard .name { font-weight:900; font-size:17px; letter-spacing:-.02em }
+  .pcard .meta { font-size:12px; opacity:.7; margin:2px 0 8px }
+  .pcard .desc { font-size:12px; line-height:1.4; opacity:.85 }
+  .pcard .foot { display:flex; justify-content:space-between; align-items:center; margin-top:10px }
+  .pcard.busy { opacity:.55 }
+</style>
+
+<h2>Ronda 2, sin flechas ni símbolos decorativos</h2>
+<p class="subtitle">Home, listado, perfil, sign-in y menú mobile. Es una propuesta: decime qué te gusta, qué cambiarías y qué te hace ruido. Si querés marcar una vista, hacé click.</p>
+
+<!-- ================= HOME ================= -->
+<div class="mockup" data-choice="home" onclick="toggleSelect(this)">
+  <div class="mockup-header">1 · Home</div>
+  <div class="mockup-body" style="padding:0">
+    <div class="sx">
+      <nav><span>SYNERGIA</span><div class="links"><span class="on">Home</span><span>Talent</span><span>Opportunities</span><span>About</span></div><span class="btn light" style="padding:6px 10px;font-size:11px">Sign in</span></nav>
+      <div class="wrap" style="display:grid;grid-template-columns:1.35fr 1fr;gap:26px;align-items:end;padding-top:40px">
+        <div>
+          <span class="label">Talent marketplace for developers</span>
+          <h1 class="h-giant" style="margin-top:14px">Bringing<br><em>talent</em><br>together.</h1>
+        </div>
+        <div>
+          <p style="font-size:16px;line-height:1.45;margin:0 0 18px">Developers find the teams they want to build with. Organizations find the people who'll ship. No recruiters in between.</p>
+          <div style="display:flex;gap:12px"><span class="btn">Find talent</span><span class="btn light">Find a team</span></div>
+        </div>
+      </div>
+
+      <div class="wrap" style="display:grid;grid-template-columns:1.2fr 1fr 1fr;grid-template-rows:150px 150px;gap:12px;padding-top:6px">
+        <div class="tile" style="grid-row:span 2;background:var(--brand);color:#fff;display:flex;flex-direction:column;justify-content:space-between">
+          <span class="label">I want to hire</span>
+          <div><div style="font-size:64px;font-weight:900;letter-spacing:-.05em;line-height:.9">1,240</div><div style="font-weight:700">developers open to work</div></div>
+        </div>
+        <div class="tile" style="background:var(--accent);display:flex;flex-direction:column;justify-content:space-between">
+          <span class="label">I want a team</span>
+          <div style="display:flex;justify-content:space-between;align-items:end"><b style="font-size:34px;letter-spacing:-.04em">86 orgs</b></div>
+        </div>
+        <div class="tile" style="background:var(--yellow);display:flex;flex-direction:column;justify-content:space-between">
+          <span class="label">Top specialty</span>
+          <b style="font-size:34px;letter-spacing:-.04em">React</b>
+        </div>
+        <div class="tile" style="grid-column:span 2;display:flex;align-items:center;gap:14px">
+          <div class="av" style="width:56px;height:56px;background:#FFB4A2"></div>
+          <div style="flex:1"><span class="label" style="opacity:.6">Featured</span><div style="font-weight:900;font-size:18px">Lucía Fernández</div><div style="font-size:12px">React & design systems · 5 years</div></div>
+          <span class="tag" style="background:var(--accent)">Open to work</span>
+        </div>
+      </div>
+
+      <div class="marquee"><span>React</span><span>Python</span><span>Fintech</span><span>Node.js</span><span>Healthtech</span><span>Go</span><span>E-commerce</span><span>Rust</span></div>
+
+      <div style="background:var(--brand);color:#fff;padding:28px 30px 18px;border-top:2px solid #111">
+        <div style="display:flex;justify-content:space-between;align-items:end">
+          <div style="font-size:84px;font-weight:900;letter-spacing:-.06em;line-height:.8">SYNERGIA</div>
+          <div style="display:flex;gap:26px;font-size:12px;font-weight:700"><span>Talent</span><span>Opportunities</span><span>About</span><span>Account</span></div>
+        </div>
+        <div style="font-size:11px;opacity:.8;margin-top:14px;border-top:1px solid rgba(255,255,255,.4);padding-top:8px">© 2026 Synergia · Developed by Tiziano Carranza</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= LISTADO ================= -->
+<div class="mockup" data-choice="listing" onclick="toggleSelect(this)">
+  <div class="mockup-header">2 · Listado /professionals (buscador y filtros funcionando)</div>
+  <div class="mockup-body" style="padding:0">
+    <div class="sx">
+      <nav><span>SYNERGIA</span><div class="links"><span>Home</span><span class="on">Talent</span><span>Opportunities</span><span>About</span></div><span>Lucía</span></nav>
+      <div class="wrap">
+        <div style="display:flex;justify-content:space-between;align-items:end">
+          <h1 class="h-big">Talent<span style="font-size:22px;vertical-align:top;letter-spacing:0;margin-left:6px">(1,240)</span></h1>
+          <span class="label" style="opacity:.6">Sorted by: newest</span>
+        </div>
+        <div style="display:flex;margin-top:18px;border:2px solid #111;border-radius:6px;background:#fff;box-shadow:4px 4px 0 #111">
+          <span style="padding:14px;font-weight:900;border-right:2px solid #111">⌕</span>
+          <span style="flex:1;padding:14px;font-size:14px;opacity:.5">Search by name, specialty or keyword…</span>
+          <span class="btn" style="border:none;border-left:2px solid #111;border-radius:0;box-shadow:none">Search</span>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+          <span class="tag" style="background:#111;color:#fff">All</span><span class="tag" style="background:var(--brand);color:#fff">React</span><span class="tag">TypeScript</span><span class="tag">Python</span><span class="tag">Node.js</span><span class="tag">Experience: 3–10</span><span class="tag" style="background:var(--accent)">Open to work only</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px">
+          <div class="pcard"><div class="top" style="background:#61DAFB"><div class="av" style="background:#FFB4A2"></div></div><div class="body"><div class="name">Lucía Fernández</div><div class="meta">React · 5 years</div><div class="desc">Design systems and accessible UIs. Turned a 6s dashboard into 800ms.</div><div class="foot"><span class="tag" style="background:var(--accent)">Open to work</span><b></b></div></div></div>
+          <div class="pcard"><div class="top" style="background:#61DAFB"><div class="av" style="background:#C8B6FF"></div></div><div class="body"><div class="name">Martín Ruiz</div><div class="meta">React · 8 years</div><div class="desc">Frontend lead. Migrated a 200k LOC app to Next.js without downtime.</div><div class="foot"><span class="tag" style="background:var(--accent)">Open to work</span><b></b></div></div></div>
+          <div class="pcard busy"><div class="top" style="background:#61DAFB"><div class="av" style="background:#B5E48C"></div></div><div class="body"><div class="name">Sofía Paz</div><div class="meta">React · 3 years</div><div class="desc">Mobile-first, animations, performance budgets.</div><div class="foot"><span class="tag">Employed</span><b></b></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= PERFIL ================= -->
+<div class="mockup" data-choice="profile" onclick="toggleSelect(this)">
+  <div class="mockup-header">3 · Perfil /[id], tipo portada (el color sale de la specialty)</div>
+  <div class="mockup-body" style="padding:0">
+    <div class="sx">
+      <nav><span>SYNERGIA</span><div class="links"><span>Home</span><span class="on">Talent</span><span>Opportunities</span><span>About</span></div><span>Sign in</span></nav>
+      <div style="background:#61DAFB;border-bottom:2px solid #111;padding:30px 30px 26px;display:flex;gap:24px;align-items:end">
+        <div class="av" style="width:120px;height:120px;background:#FFB4A2;box-shadow:6px 6px 0 #111"></div>
+        <div style="flex:1">
+          <span class="label">Professional · React</span>
+          <h1 class="h-big" style="font-size:72px;margin-top:6px">Lucía<br>Fernández</h1>
+        </div>
+        <span class="btn">Contact</span>
+      </div>
+      <div class="wrap" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+        <div class="tile"><span class="label" style="opacity:.6">Experience</span><div style="font-size:42px;font-weight:900;letter-spacing:-.04em">5 yrs</div></div>
+        <div class="tile" style="background:var(--accent)"><span class="label" style="opacity:.7">Status</span><div style="font-size:26px;font-weight:900;margin-top:8px">Open to work</div></div>
+        <div class="tile" style="grid-column:span 2"><span class="label" style="opacity:.6">About</span><p style="font-size:14px;line-height:1.5;margin:8px 0 0">React & design systems. I love turning messy interfaces into fast, accessible products. Previously at two fintech startups, now looking for a product team that cares about craft.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= SIGN IN + MOBILE ================= -->
+<div class="split">
+  <div class="mockup" data-choice="signin" onclick="toggleSelect(this)">
+    <div class="mockup-header">4 · Sign in</div>
+    <div class="mockup-body" style="padding:0">
+      <div class="sx" style="display:grid;grid-template-columns:1fr 1fr;min-height:400px">
+        <div style="background:var(--brand);color:#fff;border-right:2px solid #111;padding:26px;display:flex;flex-direction:column;justify-content:space-between">
+          <b>SYNERGIA</b>
+          <div style="font-size:44px;font-weight:900;letter-spacing:-.05em;line-height:.88;text-transform:uppercase">Welcome<br>back.</div>
+          <span style="font-size:12px;opacity:.85">New here? <u>Create an account</u></span>
+        </div>
+        <div style="padding:26px;display:flex;flex-direction:column;gap:14px;justify-content:center">
+          <div><span class="label">Email</span><div style="border:2px solid #111;border-radius:4px;background:#fff;height:44px;margin-top:6px;padding:12px;font-size:13px;opacity:.6">you@company.com</div></div>
+          <div><span class="label">Password</span><div style="border:2px solid #111;border-radius:4px;background:#fff;height:44px;margin-top:6px;box-shadow:4px 4px 0 var(--brand)"></div><span style="font-size:11px;color:#D7263D;font-weight:700">Password should have at least 8 characters.</span></div>
+          <span class="btn" style="justify-content:center;margin-top:6px">Sign in</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mockup" data-choice="mobile" onclick="toggleSelect(this)">
+    <div class="mockup-header">5 · Menú mobile abierto</div>
+    <div class="mockup-body" style="padding:0;display:flex;justify-content:center;background:#ddd">
+      <div class="sx" style="width:240px;min-height:400px;border-radius:0;background:var(--yellow);border-left:2px solid #111;border-right:2px solid #111">
+        <div style="display:flex;justify-content:space-between;padding:14px 16px;border-bottom:2px solid #111;font-weight:900;font-size:13px"><span>SYNERGIA</span><span>✕</span></div>
+        <div style="padding:18px 16px;display:flex;flex-direction:column;gap:4px">
+          <span style="font-size:40px;font-weight:900;letter-spacing:-.05em;text-transform:uppercase;line-height:1">Home</span>
+          <span style="font-size:40px;font-weight:900;letter-spacing:-.05em;text-transform:uppercase;line-height:1;color:var(--brand)">Talent</span>
+          <span style="font-size:40px;font-weight:900;letter-spacing:-.05em;text-transform:uppercase;line-height:1">Jobs</span>
+          <span style="font-size:40px;font-weight:900;letter-spacing:-.05em;text-transform:uppercase;line-height:1">Inbox</span>
+          <span style="font-size:40px;font-weight:900;letter-spacing:-.05em;text-transform:uppercase;line-height:1">About</span>
+        </div>
+        <div style="padding:0 16px"><span class="btn" style="width:100%;justify-content:center">Sign in</span></div>
+      </div>
+    </div>
+  </div>
+</div>

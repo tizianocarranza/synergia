@@ -1,11 +1,15 @@
-import { ProfessionalSignUpForm } from "@/app/ui/account/sign-up-forms"; //Dependiendo de las props que se reciban del layout (en base al boton que toque el usuario) se reenderiza un form u otro
-import { LinkButton } from "@/app/ui/buttons/buttons";
-import { MainPage } from "@/app/ui/pages/pages";
-export default function ProfessionalSignUp() {
+import Link from "next/link";
+import AuthLayout from "@/app/ui/account/auth-layout";
+import { ProfessionalSignUpForm } from "@/app/ui/account/sign-up-forms";
 
+export default function ProfessionalSignUp() {
   return (
-    <MainPage header="Welcome professional!">
-        <ProfessionalSignUpForm />
-    </MainPage>
+    <AuthLayout
+      title={<>Join as a <span className="text-yellow">professional.</span></>}
+      titleClassName="text-[40px] lg:text-5xl xl:text-6xl 2xl:text-7xl"
+      aside={<>Already have an account? <Link href="/sign-in" className="underline underline-offset-4 font-extrabold">Sign in</Link></>}
+    >
+      <ProfessionalSignUpForm />
+    </AuthLayout>
   );
 }

@@ -1,70 +1,38 @@
+@reference "../../globals.css";
+
 .container {
     @apply grid grid-cols-4 grid-rows-3 gap-4
 }
 
 .element {
     animation: breath 1000ms ease-in-out both infinite;
-    @apply h-2 w-2 rounded-full bg-brand;
+    background-color: var(--color-brand);
+    @apply h-3 w-3 border-2 border-ink;
 }
 
-.element:nth-child(1) {
-    animation-delay: 100ms;
+.element:nth-child(3n + 2) {
+    background-color: var(--color-accent);
 }
 
-.element:nth-child(2) {
-    animation-delay: 200ms;
+.element:nth-child(3n) {
+    background-color: var(--color-yellow);
 }
 
-.element:nth-child(3) {
-    animation-delay: 300ms;
-}
-
-.element:nth-child(4) {
-    animation-delay: 400ms;
-}
-
-.element:nth-child(5) {
-    animation-delay: 500ms;
-}
-
-.element:nth-child(6) {
-    animation-delay: 600ms;
-}
-
-.element:nth-child(7) {
-    animation-delay: 700ms;
-}
-
-.element:nth-child(8) {
-    animation-delay: 800ms;
-}
-
-.element:nth-child(9) {
-    animation-delay: 900ms;
-}
-
-.element:nth-child(10) {
-    animation-delay: 1000ms;
-}
-
-.element:nth-child(11) {
-    animation-delay: 1100ms;
-}
-
-.element:nth-child(12) {
-    animation-delay: 1200ms;
-}
-
-
+.element:nth-child(1) { animation-delay: 100ms; }
+.element:nth-child(2) { animation-delay: 200ms; }
+.element:nth-child(3) { animation-delay: 300ms; }
+.element:nth-child(4) { animation-delay: 400ms; }
+.element:nth-child(5) { animation-delay: 500ms; }
+.element:nth-child(6) { animation-delay: 600ms; }
+.element:nth-child(7) { animation-delay: 700ms; }
+.element:nth-child(8) { animation-delay: 800ms; }
+.element:nth-child(9) { animation-delay: 900ms; }
+.element:nth-child(10) { animation-delay: 1000ms; }
+.element:nth-child(11) { animation-delay: 1100ms; }
+.element:nth-child(12) { animation-delay: 1200ms; }
 
 @keyframes breath {
-    from {
-        background-color: theme("colors.brand");
-        opacity: 100%;
-        transform: scale(1);
-    }
     50% {
-        background-color: theme("colors.accent");
         opacity: 50%;
         transform: scale(1.5);
     }

@@ -1,37 +1,38 @@
+import Link from "next/link"
 import { auth, signOut } from "../../../../auth"
-import { NavLinks, SignInLink, SignOutLink, SynergiaLink } from "./nav-links"
+import { NavLinks, SignInLink } from "./nav-links"
+import MobileMenu from "./mobile-menu"
+import { PrimaryButton } from "../buttons/buttons"
+
+async function signOutAction() {
+    "use server"
+    await signOut()
+}
 
 export default async function Navbar() {
-    let session = await auth();
-
+    const session = await auth()
+    const signedIn = !!session?.user
 
     return (
-        <header className="fixed flex w-screen h-14 min-h-14 justify-center items-center top-0 left-0 z-50 text-sm font-semibold bg-white">
-            {/* Desktop */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 items-center w-11/12 h-full  list-none">
-                <div className="hidden lg:block">
-                    <SynergiaLink />
-                </div>
+        <header className="sticky top-0 z-50 w-full bg-paper border-b-2 border-ink h-16">
+            <div className="grid grid-cols-2 lg:grid-cols-3 items-center w-full h-full px-5 lg:px-10">
+                <Link href="/" className="font-black text-lg tracking-tight justify-self-start">SYNERGIA</Link>
 
-                <NavLinks />
+                <NavLinks signedIn={signedIn} />
 
-                <div className="hidden lg:block">
-                {(
-                    session?.user ? (
-                        <form action={async () => { "use server"; await signOut() }} className="flex flex-1 justify-end items-center gap-10 text-sm">
-                                <SignOutLink />
+                <div className="hidden lg:flex items-center justify-end gap-5">
+                    {signedIn ? (
+                        <>
+                            <Link href="/me" className="text-sm font-bold underline-offset-[6px] hover:underline decoration-2">{session?.user?.name}</Link>
+                            <form action={signOutAction}>
+                                <PrimaryButton type="submit" variant="light">Sign out</PrimaryButton>
                             </form>
-                        ) : <SignInLink />
-                    )}
+                        </>
+                    ) : <SignInLink />}
                 </div>
-            </div>
 
-            {/* Mobile TODO MAYBE aunque esta bien ahi */}   
+                <MobileMenu signedIn={signedIn} signOutAction={signOutAction} />
+            </div>
         </header>
     )
 }
-
-
-/* 
-
-*/
